@@ -1,0 +1,26 @@
+// Pampered Chef Cookbook Design System
+// Master import file - imports all design system styles in dependency order
+
+// 1. Variables (must come first - used by other files)
+@import "breakpoint-variables";
+@import "color-variables";
+
+// 2. Mixins (used by component styles)
+@import "font-mixins";
+
+// 3. Base styles
+@import "fonts";
+@import "color";
+@import "spacing";
+@import "interactive";
+@import "lists";
+
+// 4. Component styles
+@import "buttons";
+@import "form";
+@import "cards";
+@import "progressbars";
+@import "loaders";
+
+// 5. Layout
+@import "grid";

@@ -1,0 +1,24 @@
+ol.pc-list,
+ul.pc-list {
+    margin-left: 0;
+    padding-left: 10px;
+    li {
+        margin-bottom: 8px;
+    }
+}
+ol.pc-list {
+    list-style: decimal inside none;
+    li:before {
+        content: "";
+        margin-left: 0;
+        padding-left: 5px;
+    }
+}
+ul.pc-list {
+    list-style: disc inside none;
+    li:before {
+        content: "";
+        margin-left: -5px;
+        padding-left: 0px;
+    }
+}

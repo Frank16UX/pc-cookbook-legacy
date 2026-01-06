@@ -1,0 +1,25 @@
+// Breakpoint variables for responsive grid system
+// Values extracted from compiled CSS of the Pampered Chef Cookbook Design System
+
+// Extra Small (mobile portrait)
+$breakpoint-xs: 0;
+$breakpoint-xs-max: 479px;
+
+// Small (mobile landscape)
+$breakpoint-sm: 480px;
+$breakpoint-sm-max: 639px;
+
+// Medium (large mobile / small tablet)
+$breakpoint-md: 640px;
+$breakpoint-md-max: 767px;
+
+// Large (tablet)
+$breakpoint-lg: 768px;
+$breakpoint-lg-max: 991px;
+
+// Extra Large (small desktop)
+$breakpoint-xl: 992px;
+$breakpoint-xl-max: 1199px;
+
+// Extra Extra Large (large desktop)
+$breakpoint-xx: 1200px;

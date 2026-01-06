@@ -1,0 +1,23 @@
+@import "color-variables";
+//links
+.pc-link {
+    cursor: pointer;
+    color: $color-interactive;
+    text-decoration: none;
+    &:link,
+    &:visited {
+        color: $color-interactive;
+    }
+    &:hover {
+        color: $color-interactive-hovered;
+        text-decoration: underline;
+    }
+    &:active {
+        color: $color-interactive-pressed;
+    }
+}
+//forms
+
+//checkboxes
+
+//radio select

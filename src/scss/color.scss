@@ -1,0 +1,268 @@
+@import "color-variables";
+//Text Assignments
+.pc-color-primary,
+.pc-text-primary {
+    color: $color-text-01;
+}
+.pc-color-secondary,
+.pc-text-secondary {
+    color: $color-text-02;
+}
+.pc-color-tertiary,
+.pc-text-tertiary {
+    color: $color-text-03;
+}
+.pc-text-base {
+    color: $color-text-11;
+}
+.pc-color-error,
+.pc-text-error {
+    color: $color-text-10;
+}
+.pc-color-disabled,
+.pc-text-disabled {
+    color: $color-text-04;
+}
+.pc-color-promo,
+.pc-text-promotional {
+    color: $color-text-05;
+}
+.pc-color-motivation,
+.pc-text-motivation {
+    color: $color-text-06;
+}
+.pc-color-reverse,
+.pc-text-reverse {
+    color: $color-text-07;
+}
+.pc-color-success,
+.pc-text-success {
+    color: $color-support-success-text;
+}
+
+.pc-color-party-coming-up {
+    color: $color-party-coming-up;
+}
+.pc-color-party-open {
+    color: $color-party-open;
+}
+.pc-color-party-unsubmitted {
+    color: $color-party-unsubmitted;
+}
+.pc-color-party-submitted {
+    color: $color-party-submitted;
+}
+.pc-color-consultant {
+    color: $color-consultant;
+}
+.pc-color-senior-consultant {
+    color: $color-senior-consultant;
+}
+.pc-color-team-leader {
+    color: $color-team-leader;
+}
+.pc-color-director {
+    color: $color-director;
+}
+.pc-color-advanced-director {
+    color: $color-advanced-director;
+}
+.pc-color-senior-director {
+    color: $color-senior-director;
+}
+.pc-color-executive-director {
+    color: $color-executive-director;
+}
+.pc-color-senior-executive-director {
+    color: $color-senior-executive-director;
+}
+.pc-color-national-executive-director {
+    color: $color-national-executive-director;
+}
+
+//Background Assignments--always paired with an optional border-color
+.pc-bg-light,
+.pc-background-light,
+.pc-background-default {
+    background-color: $color-ui-01;
+    border-color: $color-ui-04;
+}
+.pc-bg-dark,
+.pc-background-dark,
+.pc-background-tint {
+    background-color: $color-ui-02;
+    border-color: $color-ui-04;
+}
+.pc-bg-overlay,
+.pc-background-overlay {
+    background-color: $color-ui-08;
+    border-color: $color-ui-04;
+}
+.pc-bg-base,
+.pc-background-base {
+    background-color: $color-base-00;
+    border-color: $color-base-00;
+}
+
+.pc-bg-vanilla,
+.pc-surface-vanilla {
+    background-color: $color-support-vanilla-bg;
+}
+.pc-bg-info,
+.pc-surface-information {
+    background-color: $color-support-info-bg;
+}
+.pc-bg-success,
+.pc-surface-success {
+    background-color: $color-support-success-bg;
+}
+.pc-bg-warning,
+.pc-surface-warning {
+    background-color: $color-support-warning-bg;
+}
+.pc-bg-error,
+.pc-surface-error {
+    background-color: $color-support-error-bg;
+}
+.pc-bg-motivation,
+.pc-surface-motivation {
+    background-color: $color-support-motivation-bg;
+}
+.pc-surface-default {
+    background-color: $color-ui-01;
+}
+.pc-surface-tint-1 {
+    background-color: $color-ui-02;
+}
+.pc-surface-tint-2 {
+    background-color: $color-ui-03;
+}
+.pc-surface-base {
+    background-color: $color-base-01;
+}
+.pc-surface-skeleton-loader {
+    background-color: $color-ui-10;
+}
+
+//icons
+.pc-icon-base {
+    color: $color-ui-13;
+}
+.pc-icon-primary {
+    color: $color-text-01;
+}
+.pc-icon-tertiary {
+    color: $color-text-03;
+}
+.pc-icon-reverse {
+    color: $color-ui-01;
+}
+.pc-icon-control {
+    color: $color-ui-11;
+}
+.pc-icon-star-rating {
+    color: $color-ui-16;
+}
+.pc-icon-success {
+    color: $color-ui-15;
+}
+.pc-icon-party-status-coming-up {
+    color: $color-party-coming-up;
+}
+.pc-icon-party-status-open {
+    color: $color-party-open;
+}
+.pc-icon-party-status-unsubmitted {
+    color: $color-party-unsubmitted;
+}
+.pc-icon-party-status-submitted {
+    color: $color-party-submitted;
+}
+.pc-icon-party-status-needs-attention {
+    color: $color-party-needs-attention;
+}
+
+//avatars
+.pc-avatar-consultant {
+    background-color: $color-consultant;
+}
+.pc-avatar-senior-consultant {
+    background-color: $color-senior-consultant;
+}
+.pc-avatar-team-leader {
+    background-color: $color-team-leader;
+}
+.pc-avatar-director {
+    background-color: $color-director;
+}
+.pc-avatar-advanced-director {
+    background-color: $color-advanced-director;
+}
+.pc-avatar-senior-director {
+    background-color: $color-senior-director;
+}
+.pc-avatar-executive-director {
+    background-color: $color-executive-director;
+}
+.pc-avatar-senior-executive-director {
+    background-color: $color-senior-executive-director;
+}
+.pc-avatar-national-executive-director {
+    background-color: $color-national-executive-director;
+}
+
+//borders
+.pc-border-input {
+    border-color: $color-ui-11;
+}
+.pc-border-container,
+.pc-border-divider-on-default {
+    border-color: $color-ui-09;
+}
+.pc-border-divider-on-tint {
+    border-color: $color-ui-12;
+}
+.pc-border-primary {
+    border-color: $color-ui-04;
+}
+.pc-border-base {
+    border-color: $color-base-00;
+}
+.pc-border-vanilla {
+    border-color: $color-support-vanilla-border;
+}
+.pc-border-info,
+.pc-border-information {
+    border-color: $color-support-info-border;
+}
+.pc-border-success {
+    border-color: $color-support-success-border;
+}
+.pc-border-warning {
+    border-color: $color-support-warning-border;
+}
+.pc-border-error {
+    border-color: $color-support-error-border;
+}
+.pc-border-motivation {
+    border-color: $color-support-motivation-border;
+}
+
+//Helper Classes
+.pc-border {
+    border-width: 1px;
+    border-style: solid;
+}
+.pc-no-border {
+    border-width: 0;
+}
+.pc-border-round {
+    border-radius: 10px;
+}
+.pc-border-angle {
+    border-radius: 0;
+}
+.pc-border-shadow {
+    box-shadow: 0 2px 2px rgb(11 25 28 / 10%);
+    border-width: 0;
+}

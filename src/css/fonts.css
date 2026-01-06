@@ -1,0 +1,80 @@
+/* Font Face Declarations */
+
+/* Questa Font Family */
+@font-face {
+  font-family: "Questa";
+  src: local("Questa Regular"),
+       url("../assets/fonts/Questa_Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Questa";
+  src: local("Questa Regular Italic"),
+       url("../assets/fonts/Questa_Regular_Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Questa";
+  src: local("Questa Medium"),
+       url("../assets/fonts/Questa_Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Questa";
+  src: local("Questa Medium"),
+       url("../assets/fonts/Questa_Medium.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Questa";
+  src: local("Questa Medium"),
+       url("../assets/fonts/Questa_Medium.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Questa";
+  src: local("Questa Medium Italic"),
+       url("../assets/fonts/Questa_Medium_Italic.otf") format("opentype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Questa";
+  src: local("Questa Medium Italic"),
+       url("../assets/fonts/Questa_Medium_Italic.otf") format("opentype");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Questa";
+  src: local("Questa Medium Italic"),
+       url("../assets/fonts/Questa_Medium_Italic.otf") format("opentype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Fallback Font Stacks */
+/* Antonio + Inter - Using Google Fonts as fallback */
+@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Inter:wght@400;500;600;700&display=swap');
+
+/* Inter - Using Google Fonts as primary (system fallbacks retained in font stacks) */

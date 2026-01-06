@@ -1,0 +1,217 @@
+@import "color-variables";
+@import "breakpoint-variables";
+.card-light,
+.card-dark,
+.pc-card,
+.pc-card-light,
+.pc-card-dark {
+    max-width: 100%;
+    padding: 25px;
+    border-style: solid;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-radius: 10px;
+}
+
+.card-light,
+.pc-card-light {
+    background-color: $color-ui-01;
+    border-color: $color-ui-09;
+    hr {
+        border: 0;
+        border-bottom: 1px solid $color-ui-09;
+        width: 100%;
+    }
+}
+
+.card-dark,
+.pc-card-dark {
+    background-color: $color-ui-02;
+    border-color: $color-ui-09;
+    hr {
+        border: 0;
+        border-bottom: 1px solid $color-ui-12;
+        width: 100%;
+    }
+}
+
+.pc-card {
+    hr {
+        border: 0;
+        border-bottom: 1px solid $color-ui-09;
+        width: 100%;
+    }
+}
+
+.card-no-side-border,
+.pc-card-no-side-border {
+    border-left-width: 0;
+    border-right-width: 0;
+    border-radius: 0;
+}
+
+.card-no-border,
+.pc-card-no-border {
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-radius: 0;
+}
+
+.card-no-pad,
+.pc-card-no-pad {
+    padding: 0;
+}
+
+@media only screen and (max-width: $breakpoint-md-max) {
+    //default to no border on mobile when the card is a full-width column
+    .pc-row {
+        .card-light,
+        .card-dark,
+        .pc-card,
+        .pc-card-light,
+        .pc-card-dark {
+            &.pc-col-12,
+            &.pc-col-xs-12,
+            &.pc-col-sm-12,
+            &.pc-col-md-12 {
+                border-left-width: 0;
+                border-right-width: 0;
+                border-radius: 0;
+            }
+        }
+    }
+    .card-no-side-border-mobile,
+    .pc-card-no-side-border-mobile {
+        border-left-width: 0;
+        border-right-width: 0;
+        border-radius: 0;
+    }
+}
+
+.alert {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 15px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 4px;
+    max-width: 100%;
+}
+
+.alert-error {
+    background-color: $color-support-error-bg;
+    border-color: $color-support-error-border;
+    hr {
+        border-color: $color-support-error-border;
+    }
+}
+.alert-success {
+    background-color: $color-support-success-bg;
+    border-color: $color-support-success-border;
+    hr {
+        border-color: $color-support-success-border;
+    }
+}
+.alert-note {
+    background-color: $color-support-vanilla-bg;
+    border-color: $color-support-vanilla-border;
+    hr {
+        border-color: $color-support-vanilla-border;
+    }
+}
+.alert-warning {
+    background-color: $color-support-warning-bg;
+    border-color: $color-support-warning-border;
+    hr {
+        border-color: $color-support-warning-border;
+    }
+}
+.alert-info {
+    background-color: $color-support-info-bg;
+    border-color: $color-support-info-border;
+    hr {
+        border-color: $color-support-info-border;
+    }
+}
+.alert-motivation {
+    background-color: $color-support-motivation-bg;
+    border-color: $color-support-motivation-border;
+    hr {
+        border-color: $color-support-motivation-border;
+    }
+}
+//Notifications
+.pc-notification,
+.pc-notification-vanilla,
+.pc-notification-information,
+.pc-notification-error,
+.pc-notification-warning,
+.pc-notification-success {
+    max-width: 100%;
+    padding: 10px 10px 10px 15px;
+    border-style: solid;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-radius: 5px;
+    color: $color-text-01;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    column-gap: 10px;
+    .pc-notification-content {
+        flex: auto;
+    }
+    .pc-dismiss {
+        width: 24px;
+        height: 24px;
+        color: $color-text-01;
+    }
+    .pc-dismiss::before {
+        content: url('data:image/svg+xml,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.47499 18.85L5.17499 17.525L10.675 12L5.17499 6.47499L6.47499 5.14999L12 10.675L17.525 5.14999L18.825 6.47499L13.325 12L18.825 17.525L17.525 18.85L12 13.325L6.47499 18.85Z" fill="%232F3031"/></svg>');
+    }
+}
+.pc-notification-vanilla {
+    background-color: $color-support-vanilla-bg;
+    border-color: $color-support-vanilla-border;
+}
+.pc-notification-information {
+    background-color: $color-support-info-bg;
+    border-color: $color-support-info-border;
+}
+.pc-notification-error {
+    background-color: $color-support-error-bg;
+    border-color: $color-support-error-border;
+}
+.pc-notification-warning {
+    background-color: $color-support-warning-bg;
+    border-color: $color-support-warning-border;
+}
+.pc-notification-success {
+    background-color: $color-support-success-bg;
+    border-color: $color-support-success-border;
+}
+
+//Coupon
+.pc-coupon,
+.pc-coupon-promo {
+    color: $color-text-01;
+    border-radius: 5px;
+    background-color: $color-ui-02;
+    border: 0;
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='5' ry='5' stroke='%23cbcbcb' stroke-width='2' stroke-dasharray='3%2c7' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+}
+.pc-coupon {
+    width: fit-content;
+    padding: 5px;
+}
+.pc-coupon-promo {
+    padding: 15px;
+}

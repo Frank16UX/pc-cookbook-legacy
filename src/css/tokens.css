@@ -1,0 +1,193 @@
+/**
+ * Design Tokens - All tokens in one file
+ *
+ * This file imports all generated token CSS files.
+ * Import this single file to get access to all design tokens.
+ */
+
+@import './fonts.css';
+@import './colors.css';
+@import './typography.css';
+@import './spacing.css';
+
+/**
+ * Base UI Component Customization
+ * Using design tokens to style Base UI components
+ */
+
+:root {
+  /* Button Tokens */
+  --baseui-button-font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --baseui-button-font-size: 16px;
+  --baseui-button-font-weight: 600;
+  --baseui-button-line-height: 1.5;
+  --baseui-button-padding-y: 12px;
+  --baseui-button-padding-x: 16px;
+  --baseui-button-border-radius: 4px;
+  --baseui-button-border-width: 1px;
+  --baseui-button-transition: all 200ms ease-in-out;
+
+  /* Button Primary */
+  --baseui-button-primary-bg: var(--pc-text-base);
+  --baseui-button-primary-color: var(--pc-text-reverse);
+  --baseui-button-primary-border-color: var(--pc-text-base);
+  --baseui-button-primary-hover-bg: #134859;
+  --baseui-button-primary-active-bg: #0d2d38;
+
+  /* Button Secondary */
+  --baseui-button-secondary-bg: var(--pc-background-tint);
+  --baseui-button-secondary-color: var(--pc-text-primary);
+  --baseui-button-secondary-border-color: #d1d3d5;
+  --baseui-button-secondary-hover-bg: #e8ecee;
+  --baseui-button-secondary-active-bg: #dce3e6;
+
+  /* Input Tokens */
+  --baseui-input-font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --baseui-input-font-size: 16px;
+  --baseui-input-line-height: 1.5;
+  --baseui-input-padding-y: 10px;
+  --baseui-input-padding-x: 12px;
+  --baseui-input-border-radius: 4px;
+  --baseui-input-border-width: 1px;
+  --baseui-input-border-color: #d1d3d5;
+  --baseui-input-bg: var(--pc-background-default);
+  --baseui-input-color: var(--pc-text-primary);
+  --baseui-input-placeholder-color: var(--pc-text-tertiary);
+  --baseui-input-focus-border-color: var(--pc-text-base);
+  --baseui-input-focus-shadow: 0 0 0 3px rgba(26, 89, 98, 0.1);
+  --baseui-input-disabled-bg: var(--pc-surface-tint-1);
+  --baseui-input-disabled-color: var(--pc-text-disabled);
+  --baseui-input-disabled-border-color: #d1d3d5;
+
+  /* Select Tokens */
+  --baseui-select-border-radius: 4px;
+  --baseui-select-border-width: 1px;
+  --baseui-select-border-color: #d1d3d5;
+  --baseui-select-bg: var(--pc-background-default);
+  --baseui-select-color: var(--pc-text-primary);
+  --baseui-select-hover-border-color: var(--pc-text-base);
+  --baseui-select-focus-border-color: var(--pc-text-base);
+  --baseui-select-focus-shadow: 0 0 0 3px rgba(26, 89, 98, 0.1);
+  --baseui-select-disabled-bg: var(--pc-surface-tint-1);
+  --baseui-select-disabled-color: var(--pc-text-disabled);
+
+  /* Checkbox/Radio Tokens */
+  --baseui-checkbox-size: 20px;
+  --baseui-checkbox-border-radius: 4px;
+  --baseui-checkbox-border-width: 1px;
+  --baseui-checkbox-border-color: #d1d3d5;
+  --baseui-checkbox-bg: var(--pc-background-default);
+  --baseui-checkbox-checked-bg: var(--pc-text-base);
+  --baseui-checkbox-checked-border-color: var(--pc-text-base);
+  --baseui-checkbox-checked-color: var(--pc-text-reverse);
+  --baseui-checkbox-focus-shadow: 0 0 0 3px rgba(26, 89, 98, 0.1);
+  --baseui-checkbox-disabled-bg: var(--pc-surface-tint-1);
+  --baseui-checkbox-disabled-border-color: #d1d3d5;
+
+  /* Menu/Dropdown Tokens */
+  --baseui-menu-bg: var(--pc-background-default);
+  --baseui-menu-color: var(--pc-text-primary);
+  --baseui-menu-border-color: #d1d3d5;
+  --baseui-menu-border-radius: 4px;
+  --baseui-menu-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  --baseui-menu-item-hover-bg: var(--pc-background-tint);
+  --baseui-menu-item-selected-bg: var(--pc-surface-tint-2);
+  --baseui-menu-item-selected-color: var(--pc-text-base);
+
+  /* Slider Tokens */
+  --baseui-slider-track-height: 4px;
+  --baseui-slider-track-bg: #d1d3d5;
+  --baseui-slider-track-filled-bg: var(--pc-text-base);
+  --baseui-slider-thumb-size: 20px;
+  --baseui-slider-thumb-bg: var(--pc-text-base);
+  --baseui-slider-thumb-border-radius: 50%;
+  --baseui-slider-thumb-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  /* Switch Tokens */
+  --baseui-switch-width: 44px;
+  --baseui-switch-height: 24px;
+  --baseui-switch-border-radius: 12px;
+  --baseui-switch-bg-off: #d1d3d5;
+  --baseui-switch-bg-on: var(--pc-text-base);
+  --baseui-switch-thumb-size: 20px;
+  --baseui-switch-thumb-bg: var(--pc-background-default);
+  --baseui-switch-transition: background-color 200ms ease-in-out;
+
+  /* Badge Tokens */
+  --baseui-badge-font-size: 12px;
+  --baseui-badge-font-weight: 600;
+  --baseui-badge-padding-y: 4px;
+  --baseui-badge-padding-x: 8px;
+  --baseui-badge-border-radius: 4px;
+  --baseui-badge-bg: var(--pc-text-base);
+  --baseui-badge-color: var(--pc-text-reverse);
+
+  /* Alert/Notification Tokens */
+  --baseui-alert-border-radius: 4px;
+  --baseui-alert-padding: 16px;
+  --baseui-alert-border-width: 1px;
+
+  --baseui-alert-success-bg: var(--pc-surface-success);
+  --baseui-alert-success-color: var(--pc-text-primary);
+  --baseui-alert-success-border-color: #128a00;
+
+  --baseui-alert-error-bg: var(--pc-surface-error);
+  --baseui-alert-error-color: var(--pc-text-primary);
+  --baseui-alert-error-border-color: var(--pc-text-error);
+
+  --baseui-alert-warning-bg: var(--pc-surface-warning);
+  --baseui-alert-warning-color: var(--pc-text-primary);
+  --baseui-alert-warning-border-color: #e8a000;
+
+  --baseui-alert-info-bg: var(--pc-surface-information);
+  --baseui-alert-info-color: var(--pc-text-primary);
+  --baseui-alert-info-border-color: var(--pc-text-base);
+
+  /* Modal/Dialog Tokens */
+  --baseui-modal-bg: var(--pc-background-default);
+  --baseui-modal-color: var(--pc-text-primary);
+  --baseui-modal-border-radius: 8px;
+  --baseui-modal-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --baseui-modal-overlay-bg: var(--pc-background-overlay);
+  --baseui-modal-padding: 24px;
+
+  /* Tooltip Tokens */
+  --baseui-tooltip-bg: var(--pc-text-primary);
+  --baseui-tooltip-color: var(--pc-text-reverse);
+  --baseui-tooltip-border-radius: 4px;
+  --baseui-tooltip-font-size: 14px;
+  --baseui-tooltip-padding-y: 8px;
+  --baseui-tooltip-padding-x: 12px;
+  --baseui-tooltip-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  /* Tabs Tokens */
+  --baseui-tabs-border-color: #d1d3d5;
+  --baseui-tabs-tab-color: var(--pc-text-tertiary);
+  --baseui-tabs-tab-active-color: var(--pc-text-base);
+  --baseui-tabs-tab-active-border-color: var(--pc-text-base);
+  --baseui-tabs-tab-padding: 12px 16px;
+  --baseui-tabs-tab-font-weight: 500;
+
+  /* Pagination Tokens */
+  --baseui-pagination-size: 40px;
+  --baseui-pagination-border-radius: 4px;
+  --baseui-pagination-border-width: 1px;
+  --baseui-pagination-border-color: #d1d3d5;
+  --baseui-pagination-bg: var(--pc-background-default);
+  --baseui-pagination-color: var(--pc-text-primary);
+  --baseui-pagination-active-bg: var(--pc-text-base);
+  --baseui-pagination-active-color: var(--pc-text-reverse);
+  --baseui-pagination-disabled-color: var(--pc-text-disabled);
+
+  /* Focus Outline Tokens */
+  --baseui-focus-outline-width: 2px;
+  --baseui-focus-outline-color: var(--pc-text-base);
+  --baseui-focus-outline-offset: 2px;
+
+  /* Spacing Tokens (using existing tokens) */
+  --baseui-spacing-xs: 4px;
+  --baseui-spacing-sm: 8px;
+  --baseui-spacing-md: 16px;
+  --baseui-spacing-lg: 24px;
+  --baseui-spacing-xl: 32px;
+}

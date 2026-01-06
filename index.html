@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Tokens Preview</title>
+
+  <!-- Load Google Fonts first -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Embed Questa fonts directly -->
+  <style>
+    @font-face {
+      font-family: "Questa";
+      src: url("assets/fonts/Questa_Regular.otf") format("opentype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Questa";
+      src: url("assets/fonts/Questa_Medium.otf") format("opentype");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+
+  <link rel="stylesheet" href="src/css/tokens.css">
+  <link rel="stylesheet" href="src/css/cookbook.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: #f5f5f5;
+      padding: var(--pc-spacer-2xl);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    /* Tab Styles */
+    .tabs {
+      display: flex;
+      border-bottom: 2px solid #e0e0e0;
+      background: white;
+    }
+
+    .tab-button {
+      flex: 1;
+      padding: var(--pc-spacer-lg) var(--pc-spacer-md);
+      text-align: center;
+      border: none;
+      background: white;
+      color: var(--pc-text-tertiary);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 200ms ease-in-out;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+    }
+
+    .tab-button:hover {
+      background: var(--pc-surface-tint-1);
+      color: var(--pc-text-primary);
+    }
+
+    .tab-button.active {
+      color: var(--pc-text-base);
+      border-bottom-color: var(--pc-text-base);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--pc-base-accent-one), var(--pc-base-primary));
+      color: white;
+      padding: var(--pc-spacer-2xl);
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: var(--pc-spacer-sm);
+    }
+
+    header p {
+      opacity: 0.9;
+    }
+
+    .content {
+      padding: var(--pc-spacer-2xl);
+    }
+
+    section {
+      margin-bottom: var(--pc-spacer-4xl);
+    }
+
+    section h2 {
+      color: var(--pc-base-accent-one);
+      border-bottom: 2px solid var(--pc-base-accent-one);
+      padding-bottom: var(--pc-spacer-sm);
+      margin-bottom: var(--pc-spacer-lg);
+      font-size: 1.8rem;
+    }
+
+    section h3 {
+      color: var(--pc-text-primary);
+      margin-top: var(--pc-spacer-xl);
+      margin-bottom: var(--pc-spacer-md);
+      font-size: 1.3rem;
+    }
+
+    /* Color Swatches */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: var(--pc-spacer-md);
+    }
+
+    .color-swatch {
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .color-preview {
+      height: 80px;
+      width: 100%;
+    }
+
+    .color-info {
+      padding: var(--pc-spacer-sm);
+      background: white;
+    }
+
+    .color-name {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--pc-text-primary);
+      margin-bottom: var(--pc-spacer-xs);
+    }
+
+    .color-value {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: var(--pc-text-tertiary);
+    }
+
+    /* Typography Samples */
+    .typography-sample {
+      margin-bottom: var(--pc-spacer-lg);
+      padding: var(--pc-spacer-md);
+      background: var(--pc-surface-tint-1);
+      border-radius: 6px;
+    }
+
+    .typography-label {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: var(--pc-text-tertiary);
+      margin-bottom: var(--pc-spacer-xs);
+    }
+
+    /* Spacing Examples */
+    .spacing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: var(--pc-spacer-md);
+    }
+
+    .spacing-example {
+      text-align: center;
+    }
+
+    .spacing-box {
+      background: var(--pc-base-accent-seven);
+      border: 2px solid var(--pc-base-accent-one);
+      display: inline-block;
+      position: relative;
+    }
+
+    .spacing-box::after {
+      content: attr(data-size);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 0.75rem;
+      color: var(--pc-text-primary);
+      font-weight: 600;
+    }
+
+    .spacing-label {
+      margin-top: var(--pc-spacer-xs);
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: var(--pc-text-tertiary);
+    }
+
+    /* Components Section Styles */
+    .components-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--pc-spacer-lg);
+    }
+
+    .component-card {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: var(--pc-spacer-lg);
+      background: var(--pc-surface-tint-1);
+    }
+
+    .component-card h3 {
+      color: var(--pc-text-base);
+      margin-bottom: var(--pc-spacer-md);
+      font-size: 1.1rem;
+    }
+
+    .component-example {
+      margin-bottom: var(--pc-spacer-md);
+      padding: var(--pc-spacer-md);
+      background: white;
+      border-radius: 4px;
+      border: 1px solid #e0e0e0;
+    }
+
+    /* Custom Button Styles using tokens */
+    .btn {
+      font-family: var(--baseui-button-font-family);
+      font-size: var(--baseui-button-font-size);
+      font-weight: var(--baseui-button-font-weight);
+      line-height: var(--baseui-button-line-height);
+      padding: var(--baseui-button-padding-y) var(--baseui-button-padding-x);
+      border-radius: var(--baseui-button-border-radius);
+      border-width: var(--baseui-button-border-width);
+      border-style: solid;
+      cursor: pointer;
+      transition: var(--baseui-button-transition);
+    }
+
+    .btn-primary {
+      background-color: var(--baseui-button-primary-bg);
+      color: var(--baseui-button-primary-color);
+      border-color: var(--baseui-button-primary-border-color);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--baseui-button-primary-hover-bg);
+    }
+
+    .btn-primary:active {
+      background-color: var(--baseui-button-primary-active-bg);
+    }
+
+    .btn-secondary {
+      background-color: var(--baseui-button-secondary-bg);
+      color: var(--baseui-button-secondary-color);
+      border-color: var(--baseui-button-secondary-border-color);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--baseui-button-secondary-hover-bg);
+    }
+
+    /* Input Styles */
+    .input-field {
+      font-family: var(--baseui-input-font-family);
+      font-size: var(--baseui-input-font-size);
+      line-height: var(--baseui-input-line-height);
+      padding: var(--baseui-input-padding-y) var(--baseui-input-padding-x);
+      border-radius: var(--baseui-input-border-radius);
+      border-width: var(--baseui-input-border-width);
+      border-style: solid;
+      border-color: var(--baseui-input-border-color);
+      background-color: var(--baseui-input-bg);
+      color: var(--baseui-input-color);
+      width: 100%;
+      transition: all 200ms ease-in-out;
+    }
+
+    .input-field::placeholder {
+      color: var(--baseui-input-placeholder-color);
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--baseui-input-focus-border-color);
+      box-shadow: var(--baseui-input-focus-shadow);
+    }
+
+    .input-field:disabled {
+      background-color: var(--baseui-input-disabled-bg);
+      color: var(--baseui-input-disabled-color);
+      border-color: var(--baseui-input-disabled-border-color);
+      cursor: not-allowed;
+    }
+
+    /* Checkbox Styles */
+    .checkbox-wrapper {
+      display: flex;
+      align-items: center;
+      gap: var(--baseui-spacing-sm);
+      margin-bottom: var(--baseui-spacing-md);
+    }
+
+    .checkbox-input {
+      width: var(--baseui-checkbox-size);
+      height: var(--baseui-checkbox-size);
+      border-radius: var(--baseui-checkbox-border-radius);
+      border-width: var(--baseui-checkbox-border-width);
+      border-style: solid;
+      border-color: var(--baseui-checkbox-border-color);
+      background-color: var(--baseui-checkbox-bg);
+      cursor: pointer;
+      accent-color: var(--baseui-checkbox-checked-bg);
+    }
+
+    /* Badge Styles */
+    .badge {
+      font-size: var(--baseui-badge-font-size);
+      font-weight: var(--baseui-badge-font-weight);
+      padding: var(--baseui-badge-padding-y) var(--baseui-badge-padding-x);
+      border-radius: var(--baseui-badge-border-radius);
+      background-color: var(--baseui-badge-bg);
+      color: var(--baseui-badge-color);
+      display: inline-block;
+    }
+
+    /* Alert Styles */
+    .alert {
+      border-radius: var(--baseui-alert-border-radius);
+      padding: var(--baseui-alert-padding);
+      border-width: var(--baseui-alert-border-width);
+      border-style: solid;
+      margin-bottom: var(--baseui-spacing-md);
+    }
+
+    .alert-success {
+      background-color: var(--baseui-alert-success-bg);
+      color: var(--baseui-alert-success-color);
+      border-color: var(--baseui-alert-success-border-color);
+    }
+
+    .alert-error {
+      background-color: var(--baseui-alert-error-bg);
+      color: var(--baseui-alert-error-color);
+      border-color: var(--baseui-alert-error-border-color);
+    }
+
+    .alert-warning {
+      background-color: var(--baseui-alert-warning-bg);
+      color: var(--baseui-alert-warning-color);
+      border-color: var(--baseui-alert-warning-border-color);
+    }
+
+    .alert-info {
+      background-color: var(--baseui-alert-info-bg);
+      color: var(--baseui-alert-info-color);
+      border-color: var(--baseui-alert-info-border-color);
+    }
+
+    /* Radio Styles */
+    .radio-wrapper {
+      display: flex;
+      align-items: center;
+      gap: var(--baseui-spacing-sm);
+      margin-bottom: var(--baseui-spacing-md);
+    }
+
+    .radio-input {
+      width: var(--baseui-checkbox-size);
+      height: var(--baseui-checkbox-size);
+      border-radius: 50%;
+      border-width: var(--baseui-checkbox-border-width);
+      border-style: solid;
+      border-color: var(--baseui-checkbox-border-color);
+      background-color: var(--baseui-checkbox-bg);
+      cursor: pointer;
+      accent-color: var(--baseui-checkbox-checked-bg);
+    }
+
+    /* Select Styles */
+    .select-field {
+      font-family: var(--baseui-input-font-family);
+      font-size: var(--baseui-input-font-size);
+      padding: var(--baseui-input-padding-y) var(--baseui-input-padding-x);
+      border-radius: var(--baseui-select-border-radius);
+      border-width: var(--baseui-select-border-width);
+      border-style: solid;
+      border-color: var(--baseui-select-border-color);
+      background-color: var(--baseui-select-bg);
+      color: var(--baseui-select-color);
+      width: 100%;
+      cursor: pointer;
+      transition: all 200ms ease-in-out;
+    }
+
+    .select-field:focus {
+      outline: none;
+      border-color: var(--baseui-select-focus-border-color);
+      box-shadow: var(--baseui-select-focus-shadow);
+    }
+
+
+    /* Utilities Demo */
+    .utilities-demo {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--pc-spacer-md);
+    }
+
+    .utility-card {
+      border: 1px solid var(--pc-border-container);
+      border-radius: 6px;
+      background: white;
+      min-width: 200px;
+    }
+
+    .code {
+      font-family: 'Courier New', monospace;
+      background: var(--pc-surface-tint-3);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Design Tokens Preview</h1>
+      <p>A comprehensive showcase of all design tokens from tokens.json</p>
+    </header>
+
+    <div class="tabs">
+      <button class="tab-button active" onclick="switchTab(event, 'foundations')">Foundations</button>
+      <button class="tab-button" onclick="switchTab(event, 'components')">Components</button>
+    </div>
+
+    <div id="foundations" class="tab-content active">
+      <div class="content">
+      <section id="colors">
+        <h2>Colors</h2>
+
+        <h3>Text Colors</h3>
+        <div class="color-grid">
+          <div class="color-swatch">
+            <div class="color-preview" style="background-color: var(--pc-text-primary);"></div>
+            <div class="color-info">
+              <div class="color-name">Text Primary</div>
+              <div class="color-value">--pc-text-primary</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-preview" style="background-color: var(--pc-text-secondary);"></div>
+            <div class="color-info">
+              <div class="color-name">Text Secondary</div>
+              <div class="color-value">--pc-text-secondary</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-preview" style="background-color: var(--pc-text-tertiary);"></div>
+            <div class="color-info">
+              <div class="color-name">Text Tertiary</div>
+              <div class="color-value">--pc-text-tertiary</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-preview" style="background-color: var(--pc-text-base);"></div>
+            <div class="color-info">
+              <div class="color-name">Text Base</div>
+              <div class="color-value">--pc-text-base</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-preview" style="background-color: var(--pc-text-success);"></div>
+            <div class="color-info">
+              <div class="color-name">Text Success</div>
+              <div class="color-value">--pc-text-success</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-preview" style="background-color: var(--pc-text-error);"></div>
+            <div class="color-info">
+              <div class="color-name">Text Error</div>
+              <div class="color-value">--pc-text-error</div>
+            </div>
+          </div>
+        </div>
+
+        <h3>Surface Colors</h3>
+        <div class="color-grid">
+          <div class="color-swatch">
+            <div class="color-preview" style="background-color: var(--pc-surface-default); border: 1px solid #ccc;"></div>
+            <div class="color-info">
+              <div class="color-name">Surface Default</div>
+              <div class="color-value">--pc-surface-default</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-preview" style="background-color: var(--pc-surface-tint-1);"></div>
+            <div class="color-info">
+              <div class="color-name">Surface Tint 1</div>
+              <div class="color-value">--pc-surface-tint-1</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-preview" style="background-color: var(--pc-surface-tint-2);"></div>
+            <div class="color-info">
+              <div class="color-name">Surface Tint 2</div>
+              <div class="color-value">--pc-surface-tint-2</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-preview" style="background-color: var(--pc-surface-information);"></div>
+            <div class="color-info">
+              <div class="color-name">Surface Information</div>
+              <div class="color-value">--pc-surface-information</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-preview" style="background-color: var(--pc-surface-success);"></div>
+            <div class="color-info">
+              <div class="color-name">Surface Success</div>
+              <div class="color-value">--pc-surface-success</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-preview" style="background-color: var(--pc-surface-error);"></div>
+            <div class="color-info">
+              <div class="color-name">Surface Error</div>
+              <div class="color-value">--pc-surface-error</div>
+            </div>
+          </div>
+        </div>
+
+        <h3>Base Accent Colors</h3>
+        <div class="color-grid">
+          <div class="color-swatch">
+            <div class="color-preview" style="background-color: var(--pc-base-primary);"></div>
+            <div class="color-info">
+              <div class="color-name">Base Primary</div>
+              <div class="color-value">--pc-base-primary</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-preview" style="background-color: var(--pc-base-accent-one);"></div>
+            <div class="color-info">
+              <div class="color-name">Base Accent One</div>
+              <div class="color-value">--pc-base-accent-one</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-preview" style="background-color: var(--pc-base-accent-two);"></div>
+            <div class="color-info">
+              <div class="color-name">Base Accent Two</div>
+              <div class="color-value">--pc-base-accent-two</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-preview" style="background-color: var(--pc-base-accent-three);"></div>
+            <div class="color-info">
+              <div class="color-name">Base Accent Three</div>
+              <div class="color-value">--pc-base-accent-three</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-preview" style="background-color: var(--pc-base-accent-four);"></div>
+            <div class="color-info">
+              <div class="color-name">Base Accent Four</div>
+              <div class="color-value">--pc-base-accent-four</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-preview" style="background-color: var(--pc-base-accent-five);"></div>
+            <div class="color-info">
+              <div class="color-name">Base Accent Five</div>
+              <div class="color-value">--pc-base-accent-five</div>
+            </div>
+          </div>
+        </div>
+
+        <h3>All Color Tokens</h3>
+        <div id="all-color-grid" class="color-grid" aria-live="polite"></div>
+      </section>
+
+      <!-- Typography Section -->
+      <section id="typography">
+        <h2>Typography</h2>
+
+        <h3>Headings</h3>
+        <div class="typography-sample">
+          <div class="typography-label">.pc-heading-5</div>
+          <div class="pc-heading-5">The quick brown fox jumps over the lazy dog</div>
+        </div>
+        <div class="typography-sample">
+          <div class="typography-label">.pc-heading-4</div>
+          <div class="pc-heading-4">The quick brown fox jumps over the lazy dog</div>
+        </div>
+        <div class="typography-sample">
+          <div class="typography-label">.pc-heading-3</div>
+          <div class="pc-heading-3">The quick brown fox jumps over the lazy dog</div>
+        </div>
+        <div class="typography-sample">
+          <div class="typography-label">.pc-heading-2</div>
+          <div class="pc-heading-2">The quick brown fox jumps over the lazy dog</div>
+        </div>
+        <div class="typography-sample">
+          <div class="typography-label">.pc-heading-1</div>
+          <div class="pc-heading-1">The quick brown fox jumps over the lazy dog</div>
+        </div>
+
+        <h3>Subheadings (Strong)</h3>
+        <div class="typography-sample">
+          <div class="typography-label">.pc-subheading-strong-2</div>
+          <div class="pc-subheading-strong-2">The quick brown fox jumps over the lazy dog</div>
+        </div>
+        <div class="typography-sample">
+          <div class="typography-label">.pc-subheading-strong-1</div>
+          <div class="pc-subheading-strong-1">The quick brown fox jumps over the lazy dog</div>
+        </div>
+
+        <h3>Subheadings (Regular)</h3>
+        <div class="typography-sample">
+          <div class="typography-label">.pc-subheading-2</div>
+          <div class="pc-subheading-2">The quick brown fox jumps over the lazy dog</div>
+        </div>
+        <div class="typography-sample">
+          <div class="typography-label">.pc-subheading-1</div>
+          <div class="pc-subheading-1">The quick brown fox jumps over the lazy dog</div>
+        </div>
+
+        <h3>Body Copy (Strong)</h3>
+        <div class="typography-sample">
+          <div class="typography-label">.pc-copy-strong-3</div>
+          <div class="pc-copy-strong-3">The quick brown fox jumps over the lazy dog</div>
+        </div>
+        <div class="typography-sample">
+          <div class="typography-label">.pc-copy-strong-2</div>
+          <div class="pc-copy-strong-2">The quick brown fox jumps over the lazy dog</div>
+        </div>
+        <div class="typography-sample">
+          <div class="typography-label">.pc-copy-strong-1</div>
+          <div class="pc-copy-strong-1">The quick brown fox jumps over the lazy dog</div>
+        </div>
+
+        <h3>Body Copy (Regular)</h3>
+        <div class="typography-sample">
+          <div class="typography-label">.pc-copy-3</div>
+          <div class="pc-copy-3">The quick brown fox jumps over the lazy dog</div>
+        </div>
+        <div class="typography-sample">
+          <div class="typography-label">.pc-copy-2</div>
+          <div class="pc-copy-2">The quick brown fox jumps over the lazy dog</div>
+        </div>
+        <div class="typography-sample">
+          <div class="typography-label">.pc-copy-1</div>
+          <div class="pc-copy-1">The quick brown fox jumps over the lazy dog</div>
+        </div>
+
+        <h3>Special Text Styles</h3>
+        <div class="typography-sample">
+          <div class="typography-label">.pc-link</div>
+          <div class="pc-link">This is a link style with underline</div>
+        </div>
+        <div class="typography-sample">
+          <div class="typography-label">.pc-meta</div>
+          <div class="pc-meta">Small meta text for secondary information</div>
+        </div>
+        <div class="typography-sample">
+          <div class="typography-label">.pc-strikethrough</div>
+          <div class="pc-strikethrough">This text has strikethrough decoration</div>
+        </div>
+      </section>
+
+      <!-- Spacing Section -->
+      <section id="spacing">
+        <h2>Spacing</h2>
+
+        <h3>Spacing Scale</h3>
+        <div class="spacing-grid">
+          <div class="spacing-example">
+            <div class="spacing-box" data-size="2px" style="width: 2px; height: 2px;"></div>
+            <div class="spacing-label">mini (2px)</div>
+          </div>
+          <div class="spacing-example">
+            <div class="spacing-box" data-size="5px" style="width: 5px; height: 5px;"></div>
+            <div class="spacing-label">xs (5px)</div>
+          </div>
+          <div class="spacing-example">
+            <div class="spacing-box" data-size="10px" style="width: 10px; height: 10px;"></div>
+            <div class="spacing-label">sm (10px)</div>
+          </div>
+          <div class="spacing-example">
+            <div class="spacing-box" data-size="15px" style="width: 15px; height: 15px;"></div>
+            <div class="spacing-label">md (15px)</div>
+          </div>
+          <div class="spacing-example">
+            <div class="spacing-box" data-size="20px" style="width: 20px; height: 20px;"></div>
+            <div class="spacing-label">lg (20px)</div>
+          </div>
+          <div class="spacing-example">
+            <div class="spacing-box" data-size="25px" style="width: 25px; height: 25px;"></div>
+            <div class="spacing-label">xl (25px)</div>
+          </div>
+          <div class="spacing-example">
+            <div class="spacing-box" data-size="30px" style="width: 30px; height: 30px;"></div>
+            <div class="spacing-label">2xl (30px)</div>
+          </div>
+          <div class="spacing-example">
+            <div class="spacing-box" data-size="40px" style="width: 40px; height: 40px;"></div>
+            <div class="spacing-label">3xl (40px)</div>
+          </div>
+          <div class="spacing-example">
+            <div class="spacing-box" data-size="50px" style="width: 50px; height: 50px;"></div>
+            <div class="spacing-label">4xl (50px)</div>
+          </div>
+          <div class="spacing-example">
+            <div class="spacing-box" data-size="60px" style="width: 60px; height: 60px;"></div>
+            <div class="spacing-label">5xl (60px)</div>
+          </div>
+        </div>
+
+        <h3>Spacing Utilities Demo</h3>
+        <div class="utilities-demo">
+          <div class="utility-card p-pc-spacer-md">
+            <strong>Padding Medium</strong><br>
+            <span class="code">.p-pc-spacer-md</span>
+          </div>
+          <div class="utility-card p-pc-spacer-lg">
+            <strong>Padding Large</strong><br>
+            <span class="code">.p-pc-spacer-lg</span>
+          </div>
+          <div class="utility-card p-pc-spacer-xl">
+            <strong>Padding XL</strong><br>
+            <span class="code">.p-pc-spacer-xl</span>
+          </div>
+        </div>
+
+        <div style="margin-top: var(--pc-spacer-lg);">
+          <div class="utility-card m-pc-spacer-md p-pc-spacer-sm" style="display: inline-block;">
+            <strong>Margin Medium</strong><br>
+            <span class="code">.m-pc-spacer-md</span>
+          </div>
+          <div class="utility-card m-pc-spacer-lg p-pc-spacer-sm" style="display: inline-block;">
+            <strong>Margin Large</strong><br>
+            <span class="code">.m-pc-spacer-lg</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Examples -->
+      <section id="examples">
+        <h2>Interactive Examples</h2>
+
+        <h3>Button States</h3>
+        <div style="display: flex; gap: var(--pc-spacer-md); flex-wrap: wrap;">
+          <button style="background: var(--pc-interactive-default); color: white; border: none; padding: var(--pc-spacer-sm) var(--pc-spacer-lg); border-radius: 4px; cursor: pointer;">
+            Default
+          </button>
+          <button style="background: var(--pc-interactive-hovered); color: white; border: none; padding: var(--pc-spacer-sm) var(--pc-spacer-lg); border-radius: 4px; cursor: pointer;">
+            Hovered
+          </button>
+          <button style="background: var(--pc-interactive-pressed); color: white; border: none; padding: var(--pc-spacer-sm) var(--pc-spacer-lg); border-radius: 4px; cursor: pointer;">
+            Pressed
+          </button>
+          <button style="background: var(--pc-interactive-disabled); color: white; border: none; padding: var(--pc-spacer-sm) var(--pc-spacer-lg); border-radius: 4px; cursor: not-allowed;">
+            Disabled
+          </button>
+        </div>
+
+        <h3>Alert Boxes</h3>
+        <div style="background: var(--pc-surface-information); border-left: 4px solid var(--pc-border-information); padding: var(--pc-spacer-md); margin-bottom: var(--pc-spacer-md); border-radius: 4px;">
+          <div class="pc-copy-strong-2" style="color: var(--pc-border-information); margin-bottom: var(--pc-spacer-xs);">Information</div>
+          <div class="pc-alert">This is an informational message with pc-alert typography.</div>
+        </div>
+
+        <div style="background: var(--pc-surface-success); border-left: 4px solid var(--pc-border-success); padding: var(--pc-spacer-md); margin-bottom: var(--pc-spacer-md); border-radius: 4px;">
+          <div class="pc-copy-strong-2" style="color: var(--pc-text-success); margin-bottom: var(--pc-spacer-xs);">Success</div>
+          <div class="pc-alert">Your changes have been saved successfully!</div>
+        </div>
+
+        <div style="background: var(--pc-surface-error); border-left: 4px solid var(--pc-border-error); padding: var(--pc-spacer-md); margin-bottom: var(--pc-spacer-md); border-radius: 4px;">
+          <div class="pc-copy-strong-2" style="color: var(--pc-text-error); margin-bottom: var(--pc-spacer-xs);">Error</div>
+          <div class="pc-alert">An error occurred. Please try again.</div>
+        </div>
+
+        <div style="background: var(--pc-surface-warning); border-left: 4px solid var(--pc-border-warning); padding: var(--pc-spacer-md); border-radius: 4px;">
+          <div class="pc-copy-strong-2" style="color: #8b7000; margin-bottom: var(--pc-spacer-xs);">Warning</div>
+          <div class="pc-alert">Please review your changes before proceeding.</div>
+        </div>
+      </section>
+      </div>
+    </div>
+
+    <div id="components" class="tab-content">
+      <div class="content">
+        <section id="base-ui-components">
+          <h2>Base UI Components</h2>
+
+          <div class="components-grid">
+            <!-- Buttons -->
+            <div class="component-card">
+              <h3>Buttons</h3>
+              <div class="component-example">
+                <button class="pc-btn-primary" style="width: 100%; margin-bottom: var(--pc-spacer-md);">Primary Button</button>
+                <button class="pc-btn-secondary" style="width: 100%; margin-bottom: var(--pc-spacer-md);">Secondary Button</button>
+                <button class="pc-btn-ghost" style="width: 100%;">Ghost Button</button>
+              </div>
+            </div>
+
+            <!-- Text Input -->
+            <div class="component-card">
+              <h3>Text Input</h3>
+              <div class="component-example">
+                <div class="pc-form-container" style="margin-bottom: var(--pc-spacer-md);">
+                  <input type="text" class="pc-form-control" placeholder=" " id="input1">
+                  <label class="pc-label" for="input1">Enter text here...</label>
+                </div>
+                <div class="pc-form-container pc-is-disabled">
+                  <input type="text" class="pc-form-control" placeholder=" " id="input2" disabled>
+                  <label class="pc-label" for="input2">Disabled input</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Checkbox -->
+            <div class="component-card">
+              <h3>Checkbox</h3>
+              <div class="component-example">
+                <div class="pc-checkbox">
+                  <input type="checkbox" id="check1">
+                  <label class="pc-label" for="check1">Option 1</label>
+                </div>
+                <div class="pc-checkbox">
+                  <input type="checkbox" id="check2" checked>
+                  <label class="pc-label" for="check2">Option 2 (checked)</label>
+                </div>
+                <div class="pc-checkbox">
+                  <input type="checkbox" id="check3" disabled>
+                  <label class="pc-label" for="check3">Option 3 (disabled)</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Radio -->
+            <div class="component-card">
+              <h3>Radio Button</h3>
+              <div class="component-example">
+                <div class="pc-radio">
+                  <input type="radio" id="radio1" name="options" checked>
+                  <label class="pc-label" for="radio1">Choice A</label>
+                </div>
+                <div class="pc-radio">
+                  <input type="radio" id="radio2" name="options">
+                  <label class="pc-label" for="radio2">Choice B</label>
+                </div>
+                <div class="pc-radio">
+                  <input type="radio" id="radio3" name="options" disabled>
+                  <label class="pc-label" for="radio3">Choice C (disabled)</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Select -->
+            <div class="component-card">
+              <h3>Select Dropdown</h3>
+              <div class="component-example">
+                <div class="pc-form-container">
+                  <select class="pc-form-control">
+                    <option value="">Select an option</option>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Badge -->
+            <div class="component-card">
+              <h3>Badges</h3>
+              <div class="component-example" style="display: flex; gap: var(--pc-spacer-md); flex-wrap: wrap;">
+                <span class="badge">New</span>
+                <span class="badge" style="background-color: var(--pc-text-success);">Success</span>
+                <span class="badge" style="background-color: var(--pc-text-error);">Error</span>
+                <span class="badge" style="background-color: var(--pc-text-promotion);">Featured</span>
+              </div>
+            </div>
+
+            <!-- Alerts -->
+            <div class="component-card" style="grid-column: 1 / -1;">
+              <h3>Alerts</h3>
+              <div class="component-example">
+                <div class="alert alert-success">✓ Success: Your action was completed successfully!</div>
+                <div class="alert alert-error">✕ Error: Something went wrong. Please try again.</div>
+                <div class="alert alert-warning">⚠ Warning: Please review your changes before proceeding.</div>
+                <div class="alert alert-info">ℹ Information: This is a helpful piece of information.</div>
+              </div>
+            </div>
+
+            <!-- Text Area -->
+            <div class="component-card">
+              <h3>Textarea</h3>
+              <div class="component-example">
+                <div class="pc-form-container">
+                  <textarea class="pc-form-control" placeholder=" " id="textarea1" style="resize: vertical; min-height: 100px;"></textarea>
+                  <label class="pc-label" for="textarea1">Enter your message...</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Button States -->
+            <div class="component-card">
+              <h3>Button States</h3>
+              <div class="component-example">
+                <button class="pc-btn-primary" style="width: 100%; margin-bottom: var(--pc-spacer-md);">Default</button>
+                <button class="pc-btn-primary hover" style="width: 100%; margin-bottom: var(--pc-spacer-md);">Hover</button>
+                <button class="pc-btn-primary" style="width: 100%; margin-bottom: var(--pc-spacer-md);">Active</button>
+                <button class="pc-btn-primary" style="width: 100%;" disabled>Disabled</button>
+              </div>
+            </div>
+
+            <!-- Color Variants -->
+            <div class="component-card">
+              <h3>Button Variants</h3>
+              <div class="component-example">
+                <button class="pc-btn-primary" style="width: 100%; margin-bottom: var(--pc-spacer-md);">Primary</button>
+                <button class="pc-btn-secondary" style="width: 100%; margin-bottom: var(--pc-spacer-md);">Secondary</button>
+                <button class="pc-btn-ghost" style="width: 100%;">Ghost</button>
+              </div>
+            </div>
+
+            <!-- Input States -->
+            <div class="component-card">
+              <h3>Input States</h3>
+              <div class="component-example">
+                <div class="pc-form-container" style="margin-bottom: var(--pc-spacer-md);">
+                  <input type="text" class="pc-form-control" placeholder=" " id="input-default">
+                  <label class="pc-label" for="input-default">Default</label>
+                </div>
+                <div class="pc-form-container pc-has-success" style="margin-bottom: var(--pc-spacer-md);">
+                  <input type="text" class="pc-form-control" placeholder=" " id="input-success" value="Valid input">
+                  <label class="pc-label" for="input-success">Success</label>
+                </div>
+                <div class="pc-form-container pc-has-error">
+                  <input type="text" class="pc-form-control" placeholder=" " id="input-error" value="Invalid">
+                  <label class="pc-label" for="input-error">Error</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <footer style="text-align: center; padding: var(--pc-spacer-2xl); color: var(--pc-text-tertiary);">
+    <p class="pc-meta">Design Tokens Preview • Generated from tokens.json</p>
+  </footer>
+
+  <script>
+  window.addEventListener('load', function() {
+    const VAR_RE = /--(pc-[\w-]+)\s*:\s*([^;]+);/g;
+
+    function collectRootVarsFromRule(rule, map) {
+      if (rule.type === CSSRule.STYLE_RULE && rule.selectorText && rule.selectorText.includes(':root')) {
+        const css = rule.cssText;
+        let m;
+        while ((m = VAR_RE.exec(css)) !== null) {
+          map.set('--' + m[1], m[2].trim());
+        }
+      } else if (rule.type === CSSRule.IMPORT_RULE && rule.styleSheet) {
+        try {
+          for (const r of rule.styleSheet.cssRules) collectRootVarsFromRule(r, map);
+        } catch (e) {
+          // inaccessible import
+        }
+      } else if (rule.cssRules) {
+        for (const r of rule.cssRules) collectRootVarsFromRule(r, map);
+      }
+    }
+
+    function getRootVars() {
+      const vars = new Map();
+      for (const sheet of document.styleSheets) {
+        try {
+          if (!sheet.cssRules) continue;
+          for (const rule of sheet.cssRules) collectRootVarsFromRule(rule, vars);
+        } catch (e) {
+          // Ignore CORS-protected stylesheets
+        }
+      }
+      return vars;
+    }
+
+    function looksLikeColor(val) {
+      if (!val) return false;
+      return /^#|^rgb|^hsl|^rgba|^hsla|^transparent/i.test(val.trim());
+    }
+
+    const vars = Array.from(getRootVars().entries()).sort(([a],[b]) => a.localeCompare(b));
+    const container = document.getElementById('all-color-grid');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    vars.forEach(([name, rawValue]) => {
+      let computed = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+      const value = (computed && looksLikeColor(computed)) ? computed : rawValue;
+      if (!looksLikeColor(value)) return;
+
+      const sw = document.createElement('div');
+      sw.className = 'color-swatch';
+      sw.innerHTML = `
+        <div class="color-preview" style="background-color: ${value};"></div>
+        <div class="color-info">
+          <div class="color-name">${name}</div>
+          <div class="color-value">${value}</div>
+        </div>
+      `;
+      container.appendChild(sw);
+    });
+
+    if (container.children.length === 0) {
+      container.innerHTML = '<p style="grid-column: 1 / -1; color: var(--pc-text-tertiary);">No color tokens found or stylesheets blocked by CORS.</p>';
+    }
+  });
+
+  function switchTab(event, tabName) {
+    event.preventDefault();
+    
+    // Hide all tab contents
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach(content => content.classList.remove('active'));
+    
+    // Remove active class from all buttons
+    const buttons = document.querySelectorAll('.tab-button');
+    buttons.forEach(button => button.classList.remove('active'));
+    
+    // Show selected tab content
+    document.getElementById(tabName).classList.add('active');
+    
+    // Add active class to clicked button
+    event.target.classList.add('active');
+  }
+  </script>
+</body>
+</html>

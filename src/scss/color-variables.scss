@@ -1,0 +1,122 @@
+//base
+$color-base-00: #2d7e8b; //.pc-bg-base
+$color-base-01: #1a5962; //.pc-surface-base
+$color-base-02: #0ab289;
+$color-base-03: #b0dac8;
+$color-base-04: #a3d060;
+$color-base-05: #d8e9bd;
+$color-base-06: #00adae;
+$color-base-07: #b8dbe0;
+$color-base-08: #e1eef0;
+$color-base-09: #73296d;
+$color-base-10: #eee7ee;
+$color-base-11: #f3d6cd;
+$color-base-12: #eab264;
+$color-base-13: #c6404f;
+$color-base-14: #021737;
+
+// text colors - text-on for buttons
+$color-text-01: #2f3031; //.pc-color-primary, .pc-icon-primary
+$color-text-02: #45474a; //.pc-color-secondary
+$color-text-03: #6b6c70; //.pc-color-tertiary, .pc-icon-tertiary
+$color-text-04: #caccce; //.pc-color-disabled
+$color-text-05: #d83b21; //.pc-color-promo
+$color-text-06: #73296d; //.pc-color-motivation
+$color-text-07: #ffffff; //.pc-color-on-primary, .pc-btn-default, .pc-btn-primary
+$color-text-08: #1a5962; //.pc-color-on-secondary, .pc-btn-secondary
+$color-text-09: #1a5962; //.pc-color-on-ghost, .pc-btn-ghost
+$color-text-10: #e41a00; //.pc-color-error
+$color-text-11: #1a5962; //.pc-text-base
+
+//ui
+$color-ui-01: #ffffff; //.pc-bg-light, .pc-surface-default, .pc-icon-reverse
+$color-ui-02: #f3f6f6; //.pc-bg-dark, .card-dark, .pc-surface-tint-1, .pc-coupon
+$color-ui-03: #e1eef0; //.pc-surface-tint-2
+$color-ui-04: #cfdbdb; // border for .pc-bg-light, .pc-bg-dark
+$color-ui-05: #c5d3d3; //
+$color-ui-06: #acc0c0; //
+$color-ui-07: #8aa8a8; //
+$color-ui-08: rgba(#000000, 0.55); //.pc-bg-overlay
+$color-ui-09: #d3dede; // .card, .pc-border-container
+$color-ui-10: #ececec; // .pc-surface-skeleton-loader
+$color-ui-11: #909298; // .pc-border-input, .pc-icon-control
+$color-ui-12: #c8d5d5; // .pc-border-divider-on-tint
+$color-ui-13: #2a7f8c; // .pc-icon-base
+$color-ui-14: #cbcbcb; // .pc-coupon
+$color-ui-15: #42af00; // .pc-icon-success
+$color-ui-16: #f79521; // .pc-icon-star-rating
+
+//support colors
+$color-support-vanilla-border: #b5b7ba; //.pc-bg-vanilla
+$color-support-vanilla-bg: #f4f5f5; //.pc-bg-vanilla
+$color-support-input-border: #959d9d; //.pc-bg-input
+$color-support-input-bg: #ffffff; //.pc-bg-input
+$color-support-input-focus-border: #124248; //.pc-bg-input
+$color-support-input-disabled-bg: #cbcbcb; //.pc-bg-input
+$color-support-info-border: #2d7e8b; //.pc-bg-info
+$color-support-info-bg: #d7eaed; //.pc-bg-info
+$color-support-success-text: #128a00; //.pc-text-success
+$color-support-success-border: #42af00; //.pc-bg-succes
+$color-support-success-bg: #f8fff4; //.pc-bg-success
+$color-support-warning-border: #f2c75c; //.pc-bg-warning
+$color-support-warning-bg: #fdf9ec; //.pc-bg-warning
+$color-support-error-border: #e41a00; //.pc-bg-error
+$color-support-error-bg: #feedeb; //.pc-bg-error
+$color-support-motivation-border: #73296d; //.pc-bg-motivation
+$color-support-motivation-bg: #eee7ee; //.pc-bg-motivation
+
+//buttons
+$color-button-primary: #1a5962; //.pc-btn-default, .pc-btn-primary, .pc-text-base
+$color-button-primary-hover: #124248; //.pc-btn-default, .pc-btn-primary
+$color-button-primary-press: #124248; //.pc-btn-default, .pc-btn-primary
+$color-button-primary-disabled: #cbcbcb; //.pc-btn-default, .pc-btn-primary
+$color-button-secondary: #ffffff; //.pc-btn-secondary
+$color-button-secondary-hover: #eff3f4; //.pc-btn-secondary
+$color-button-secondary-press: #eff3f4; //.pc-btn-secondary
+$color-button-secondary-disabled: #cbcbcb; //.pc-btn-secondary
+$color-button-ghost: #ffffff; //.pc-btn-ghost
+$color-button-ghost-hover: #ffffff; //.pc-btn-ghost
+$color-button-ghost-press: #ffffff; //.pc-btn-ghost
+$color-button-ghost-disabled: #caccce; //.pc-btn-ghost
+
+//interactive
+$color-interactive: #2c7a87; //a, .pc-link
+$color-interactive-hovered: #2c7a87; //a, .pc-link
+$color-interactive-pressed: #2c7a87; //a, .pc-link
+$color-interactive-pressed-checkbox: #124248; //a, .pc-link
+$color-interactive-disabled: #cbcbcb;
+$color-interactive-focused: #3597a6; //progress bars
+$color-interactive-focused-background: #d6d6d6; //progress bars
+
+//party status colors
+$color-party-coming-up: #c2bd37; // .pc-icon-party-status-coming-up
+$color-party-open: #2d7e8b; // .pc-icon-party-status-open
+$color-party-unsubmitted: #f44a00; // .pc-icon-party-status-unsubmitted
+$color-party-submitted: #979798; // .pc-icon-party-status-submitted
+$color-party-needs-attention: #e41a00; // .pc-icon-party-status-needs-attention
+
+//consultants title colors
+$color-consultant: #b7ce95; //.pc-color-consultant, .pc-bg-consultant
+$color-senior-consultant: #5f8fb4; //.pc-color-senior-consultant, .pc-bg-senior-consultant
+$color-team-leader: #e56db1; //.pc-color-team-leader, .pc-bg-team-leader
+$color-director: #bf0d3e; //.pc-color-director, .pc-bg-director
+$color-advanced-director: #003865; //.pc-color-advanced-director, .pc-bg-advanced-director
+$color-senior-director: #f2c75c; //.pc-color-senior-director, .pc-bg-senior-director
+$color-executive-director: #008c95; //.pc-color-executive-director, .pc-bg-executive-director
+$color-senior-executive-director: #563d82; //.pc-color-senior-executive-director, .pc-bg-senior-executive-director
+$color-national-executive-director: #00a9ce; //.pc-color-national-executive-director, .pc-bg-national-executive-director
+
+//enrichables
+$color-enrichables-01: #0ab289; //.pc-color-enrichables-kf, .pc-bg-enrichables-kf
+$color-enrichables-02: #b0dac8; //.pc-color-enrichables-kf-tint, .pc-bg-enrichables-kf-tint
+$color-enrichables-03: #a3d060; //.pc-color-enrichables-pea, .pc-bg-enrichables-pea
+$color-enrichables-04: #d8e9bd; //.pc-color-enrichables-pear-tint, .pc-bg-enrichables-pea-tint
+$color-enrichables-05: #b7dce1; //.pc-color-enrichables-primary, .pc-bg-enrichables-primary
+$color-enrichables-06: #e1eef0; //.pc-color-enrichables-secondary, .pc-bg-enrichables-secondary
+$color-enrichables-07: #333132; //.pc-color-enrichables-tertiary, .pc-bg-enrichables-tertiary
+
+//tastebuds
+$color-tastebuds-01: #00adae; //.pc-color-tb-primary, .pc-bg-tb-primary
+$color-tastebuds-02: #b1c576; //.pc-color-tb-secondary, .pc-bg-tb-secondary
+$color-tastebuds-03: #e9735a; //.pc-color-tb-tertiary, .pc-bg-tb-tertiary
+$color-tastebuds-04: #4d4d4f; //.pc-color-tb-quarternary, .pc-bg-tb-quarternary

@@ -1,0 +1,17 @@
+@mixin Antonio {
+    font-family: "Antonio", arial, sans-serif;
+}
+@mixin FoundationSans {
+    font-family: "Inter", arial, sans-serif;
+    font-weight: 400;
+}
+@mixin FoundationSansBold {
+    font-family: "Inter", arial, sans-serif;
+    font-weight: 700;
+}
+@mixin Questa {
+    font-family: "Questa", arial, sans-serif;
+}
+@mixin QuestaBold {
+    font-family: "QuestaBold", arial, sans-serif;
+}

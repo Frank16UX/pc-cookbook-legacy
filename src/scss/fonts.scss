@@ -1,0 +1,178 @@
+@import "font-mixins";
+@import "color-variables";
+
+// Inter - loaded via Google Fonts in HTML (replaces Foundation Sans)
+// Antonio - loaded via Google Fonts in HTML
+// No @font-face declarations needed for Google Fonts
+
+// Questa - local font files
+@font-face {
+    font-family: "Questa";
+    src: url("../../assets/fonts/Questa_Regular.otf") format("opentype");
+    font-weight: 400;
+}
+@font-face {
+    font-family: "QuestaBold";
+    src: url("../../assets/fonts/Questa_Medium.otf") format("opentype");
+    font-weight: 700;
+}
+
+/*heading*/
+.pc-heading-5,
+.pc-heading-4,
+.pc-heading-3,
+.pc-heading-2,
+.pc-heading-1 {
+    @include Antonio();
+    -webkit-font-smoothing: antialiased;
+    line-height: 120%;
+    margin: 0;
+}
+.pc-heading-5 {
+    font-size: 54px;
+}
+.pc-heading-4 {
+    font-size: 45px;
+}
+.pc-heading-3 {
+    font-size: 37px;
+}
+.pc-heading-2 {
+    font-size: 31px;
+}
+.pc-heading-1 {
+    font-size: 27px;
+}
+/* subheading strong */
+.pc-subheading-strong-5,
+.pc-subheading-strong-4,
+.pc-subheading-strong-3,
+.pc-subheading-strong-2,
+.pc-subheading-strong-1 {
+    @include QuestaBold();
+    -webkit-font-smoothing: antialiased;
+}
+.pc-subheading-strong-5 {
+    font-size: 37px;
+    line-height: 120%;
+}
+.pc-subheading-strong-4 {
+    font-size: 31px;
+    line-height: 120%;
+}
+.pc-subheading-strong-3 {
+    font-size: 27px;
+    line-height: 120%;
+}
+.pc-subheading-strong-2 {
+    font-size: 21px;
+    line-height: 135%;
+}
+.pc-subheading-strong-1 {
+    font-size: 18px;
+    line-height: 135%;
+}
+/* subheading */
+.pc-subheading-5,
+.pc-subheading-4,
+.pc-subheading-3,
+.pc-subheading-2,
+.pc-subheading-1 {
+    @include Questa();
+    -webkit-font-smoothing: antialiased;
+}
+.pc-subheading-5 {
+    font-size: 37px;
+    line-height: 120%;
+}
+.pc-subheading-4 {
+    font-size: 31px;
+    line-height: 120%;
+}
+.pc-subheading-3 {
+    font-size: 27px;
+    line-height: 120%;
+}
+.pc-subheading-2 {
+    font-size: 21px;
+    line-height: 135%;
+}
+.pc-subheading-1 {
+    font-size: 18px;
+    line-height: 135%;
+}
+
+/* Copy Strong and Copy */
+.pc-copy-strong-5,
+.pc-copy-strong-4,
+.pc-copy-strong-3,
+.pc-copy-strong-2,
+.pc-copy-strong-1 {
+    @include FoundationSansBold();
+    -webkit-font-smoothing: antialiased;
+}
+.pc-copy-5,
+.pc-copy-4,
+.pc-copy-3,
+.pc-copy-2,
+.pc-copy-1 {
+    @include FoundationSans();
+    -webkit-font-smoothing: antialiased;
+}
+.pc-copy-strong-5,
+.pc-copy-5 {
+    font-size: 24px;
+    line-height: 110%;
+}
+.pc-copy-strong-4,
+.pc-copy-4 {
+    font-size: 21px;
+    line-height: 110%;
+}
+.pc-copy-strong-3,
+.pc-copy-3 {
+    font-size: 18px;
+    line-height: 135%;
+}
+.pc-copy-strong-2,
+.pc-copy-2 {
+    font-size: 16px;
+    line-height: 135%;
+}
+.pc-copy-strong-1,
+.pc-copy-1 {
+    font-size: 13px;
+    line-height: 135%;
+}
+
+/* Single Use */
+.pc-alert {
+    @include FoundationSans();
+    -webkit-font-smoothing: antialiased;
+    font-size: 15px;
+    line-height: 125%;
+}
+
+.pc-meta {
+    @include FoundationSans();
+    -webkit-font-smoothing: antialiased;
+    font-size: 11px;
+    line-height: 110%;
+}
+
+.pc-meta-strong {
+    @include FoundationSansBold();
+    -webkit-font-smoothing: antialiased;
+    font-size: 11px;
+    line-height: 110%;
+}
+
+/* Global Helpers */
+
+/* Helpers */
+.pc-strikethrough {
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+}
+@media screen and (min-width: 767px) {
+}
