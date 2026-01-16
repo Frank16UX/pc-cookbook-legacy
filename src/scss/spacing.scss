@@ -1,24 +1,68 @@
-.spacer-mini {
-    margin-bottom: 2px;
+/* Spacing Tokens - Comprehensive spacing utilities */
+
+// Spacing scale values
+$spacers: (
+  mini: 2px,
+  xs: 5px,
+  sm: 10px,
+  md: 15px,
+  lg: 20px,
+  xl: 25px,
+  '2xl': 30px,
+  '3xl': 40px,
+  '4xl': 50px,
+  '5xl': 60px
+);
+
+/* Margin Utilities */
+@each $name, $value in $spacers {
+  .m-pc-spacer-#{$name} { margin: $value; }
+  .mt-pc-spacer-#{$name} { margin-top: $value; }
+  .mr-pc-spacer-#{$name} { margin-right: $value; }
+  .mb-pc-spacer-#{$name} { margin-bottom: $value; }
+  .ml-pc-spacer-#{$name} { margin-left: $value; }
+  .mx-pc-spacer-#{$name} { margin-left: $value; margin-right: $value; }
+  .my-pc-spacer-#{$name} { margin-top: $value; margin-bottom: $value; }
 }
-.spacer-xs {
-    margin-bottom: 5px;
+
+/* Padding Utilities */
+@each $name, $value in $spacers {
+  .p-pc-spacer-#{$name} { padding: $value; }
+  .pt-pc-spacer-#{$name} { padding-top: $value; }
+  .pr-pc-spacer-#{$name} { padding-right: $value; }
+  .pb-pc-spacer-#{$name} { padding-bottom: $value; }
+  .pl-pc-spacer-#{$name} { padding-left: $value; }
+  .px-pc-spacer-#{$name} { padding-left: $value; padding-right: $value; }
+  .py-pc-spacer-#{$name} { padding-top: $value; padding-bottom: $value; }
 }
-.spacer-sm {
-    margin-bottom: 10px;
+
+/* Gap Utilities */
+@each $name, $value in $spacers {
+  .gap-pc-spacer-#{$name} { gap: $value; }
+  .gap-x-pc-spacer-#{$name} { column-gap: $value; }
+  .gap-y-pc-spacer-#{$name} { row-gap: $value; }
 }
-.spacer-md {
-    margin-bottom: 15px;
+
+/* Spacing Custom Properties */
+:root {
+  --pc-spacer-mini: 2px;
+  --pc-spacer-xs: 5px;
+  --pc-spacer-sm: 10px;
+  --pc-spacer-md: 15px;
+  --pc-spacer-lg: 20px;
+  --pc-spacer-xl: 25px;
+  --pc-spacer-2xl: 30px;
+  --pc-spacer-3xl: 40px;
+  --pc-spacer-4xl: 50px;
+  --pc-spacer-5xl: 60px;
 }
-.spacer-lg {
-    margin-bottom: 20px;
-}
-.spacer-xl {
-    margin-bottom: 25px;
-}
-.spacer-xx {
-    margin-bottom: 30px;
-}
-.spacer-max {
-    margin-bottom: 40px;
-}
+
+/* Legacy spacer classes (for backward compatibility) */
+.spacer-mini { margin-bottom: 2px; }
+.spacer-xs { margin-bottom: 5px; }
+.spacer-sm { margin-bottom: 10px; }
+.spacer-md { margin-bottom: 15px; }
+.spacer-lg { margin-bottom: 20px; }
+.spacer-xl { margin-bottom: 25px; }
+.spacer-xx { margin-bottom: 30px; }
+.spacer-max { margin-bottom: 40px; }

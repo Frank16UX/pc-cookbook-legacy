@@ -4,16 +4,29 @@
   "description": "",
   "main": "generate-css.js",
   "scripts": {
+    "dev": "npx vite",
+    "build": "npm run scss:build && npx vite build",
+    "scss:build": "npx sass src/scss/index.scss src/css/cookbook.css",
+    "scss:watch": "npx sass --watch src/scss/index.scss src/css/cookbook.css",
+    "preview": "npx vite preview",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
-    "@mui/base": "^5.0.0-beta.70"
+    "@mui/base": "^5.0.0-beta.70",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
   },
   "devDependencies": {
-    "sass": "^1.97.2"
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.2",
+    "sass": "^1.97.2",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "vite-plugin-svgr": "^4.5.0"
   }
 }

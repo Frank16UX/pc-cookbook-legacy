@@ -1,0 +1,143 @@
+// Note: sass:map, color-variables, font-mixins, and breakpoint-variables are globally available via vite.config.ts
+
+// Base component styles
+.ccNavigationUsefulLinksMenu {
+  background-color: $color-ui-01;
+  z-index: 9999;
+
+  // Desktop popover variant
+  &--desktop {
+    position: fixed;
+    top: 86px;
+    right: 30px;
+    margin-top: map.get($spacers, xs);
+    width: 350px;
+    border-radius: 4px;
+    box-shadow:
+      0px 10px 30px 0px rgba(0, 0, 0, 0.1),
+      0px 0px 15px 0px rgba(0, 0, 0, 0.05);
+    padding: map.get($spacers, xl);
+  }
+
+  // Mobile full-screen variant
+  &--mobile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: map.get($spacers, xl);
+    overflow-y: auto;
+  }
+
+  // Backdrop for mobile overlay
+  &__backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $color-ui-08;
+    z-index: 9998;
+  }
+
+  // Header section
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: map.get($spacers, lg);
+    margin-bottom: map.get($spacers, lg);
+  }
+
+  &__title {
+    @include FoundationSansBold;
+    font-size: 16px;
+    line-height: 1.35;
+    color: $color-text-01;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  &__closeButton {
+    background: none;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 200ms ease;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &:focus {
+      outline: 2px solid $color-support-input-focus-border;
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+
+  &__closeIcon {
+    width: 14px;
+    height: 14px;
+    display: block;
+    color: $color-text-01;
+  }
+
+  // Links container
+  &__linksContainer {
+    display: flex;
+    flex-direction: column;
+    gap: map.get($spacers, xl);
+  }
+
+  // Individual link item
+  &__linkItem {
+    display: flex;
+    align-items: center;
+    gap: map.get($spacers, sm);
+    text-decoration: none;
+    color: $color-text-01;
+    cursor: pointer;
+    transition: color 200ms ease;
+
+    &:hover {
+      .ccNavigationUsefulLinksMenu__linkText {
+        text-decoration: underline;
+      }
+    }
+
+    &:focus {
+      outline: 2px solid $color-support-input-focus-border;
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+
+  &__linkIcon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    display: block;
+    color: $color-base-02;
+  }
+
+  &__linkText {
+    @include FoundationSans;
+    font-size: 16px;
+    line-height: 1.35;
+    color: $color-text-01;
+    flex: 1;
+  }
+}

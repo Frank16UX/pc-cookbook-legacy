@@ -1,0 +1,41 @@
+// Component: cc-badge
+// Uses BEM methodology: Block__Element--Modifier
+
+// Block: Base badge
+.ccBadge {
+  @include FoundationSans(); // Inter 400 weight (NOT bold)
+
+  // Badge styling - matches .pc-copy-1 typography
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: map.get($spacers, mini) map.get($spacers, xs); // 2px top/bottom, 5px left/right
+
+  font-size: 13px; // .pc-copy-1
+  line-height: 135%; // .pc-copy-1
+
+  border-radius: 9999px; // Full pill shape
+  white-space: nowrap;
+
+  transition: background-color 200ms ease-in-out,
+              color 200ms ease-in-out;
+
+  // Modifier: Yellow variant (warning/onboarding)
+  &--yellow {
+    background-color: $color-support-warning-border; // #f2c75c
+    color: $color-text-01; // text-primary (#2f3031) - dark text
+  }
+
+  // Modifier: Red variant (accent/new)
+  &--red {
+    background-color: $color-base-13; // base-accent-thirteen (#c6404f)
+    color: $color-text-07; // white (#ffffff)
+  }
+
+  // Modifier: Primary variant (brand)
+  &--primary {
+    background-color: $color-base-00; // base-primary (#2d7e8b)
+    color: $color-text-07; // white (#ffffff)
+  }
+}

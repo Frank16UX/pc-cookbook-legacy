@@ -1,0 +1,105 @@
+// Component: cc-navigation-primary-button
+// Uses BEM methodology: Block__Element--Modifier
+
+// Block: Base button
+.ccNavigationPrimaryButton {
+  @include FoundationSansBold();
+
+  // Button styling
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  padding: map.get($spacers, xs) map.get($spacers, md); // 5px top/bottom, 15px left/right
+
+  font-size: 16px;
+  line-height: 1.35;
+  color: $color-text-02; // text-secondary (#45474a)
+
+  background-color: transparent;
+  border: none;
+  border-radius: 30px;
+
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  text-decoration: none;
+
+  transition: all 200ms ease-in-out;
+
+  // Element: Content wrapper
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px; // Gap between text and badge
+  }
+
+  // Element: Dot indicator
+  &__dot {
+    position: absolute;
+    top: -3px;
+    right: -12px;
+    width: 10px;
+    height: 10px;
+    background-color: $color-base-13; // base-accent-thirteen (#c6404f)
+    border-radius: 50%;
+  }
+
+  // Hover state (CSS pseudo-class)
+  &:hover {
+    background-color: $color-ui-02; // surface-tint-1 (#f3f6f6)
+
+    .ccNavigationPrimaryButton__badge {
+      background-color: $color-base-00; // base-primary (#2d7e8b)
+      color: $color-text-07; // white
+    }
+  }
+
+  // Focus state (keyboard navigation via CSS pseudo-class)
+  &:focus-visible {
+    outline: none;
+    background-color: $color-ui-02; // surface-tint-1 (#f3f6f6)
+    box-shadow: 0 0 0 4px $color-interactive-pressed-checkbox; // #124248
+
+    .ccNavigationPrimaryButton__badge {
+      background-color: $color-base-00; // base-primary (#2d7e8b)
+      color: $color-text-07; // white
+    }
+  }
+
+  // Active/pressed state (both modifier class and :active pseudo-class)
+  &--active,
+  &:active {
+    background-color: $color-base-08; // surface-tint-2 (#e1eef0)
+    color: $color-text-01; // text-primary (#2f3031)
+
+    .ccNavigationPrimaryButton__badge {
+      background-color: $color-base-00; // base-primary (#2d7e8b)
+      color: $color-text-07; // white
+    }
+  }
+
+  // Modifier: Disabled state
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
+  // Modifier: Mobile variant
+  &--mobile {
+    padding: map.get($spacers, xs) map.get($spacers, sm); // 5px top/bottom, 10px left/right
+    font-size: 13px;
+  }
+
+  // Responsive behavior (auto-switch to mobile below 768px)
+  @media (max-width: ($breakpoint-lg - 1)) {
+    padding: map.get($spacers, xs) map.get($spacers, sm); // 5px top/bottom, 10px left/right
+    font-size: 13px;
+  }
+}

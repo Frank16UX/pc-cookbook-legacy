@@ -1,0 +1,114 @@
+// Component: cc-navigation-secondary-tabs
+// Uses BEM methodology: Block__Element--Modifier
+
+// Block: Container (button wrapper)
+.ccNavigationSecondaryTabs {
+  display: inline-flex;
+  flex-direction: column;
+  height: 50px; // Desktop height
+  position: relative;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  padding: 0 map.get($spacers, xs); // 0 top/bottom, 5px left/right
+
+  // Mobile variant
+  &--mobile {
+    height: 46px; // Mobile has shorter height (46px vs 50px)
+  }
+}
+
+// Element: Link area (contains text + badge horizontally)
+.ccNavigationSecondaryTabs__link {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px; // 6px gap between text and badge (Figma spec)
+  padding: 14px map.get($spacers, xs) 10px map.get($spacers, xs); // Figma spec: pt-[14px] pb-[10px] px-0
+  white-space: nowrap; // Prevent text wrapping
+
+  @include FoundationSans(); // Foundation Sans Roman (Inter 400)
+  font-size: 16px;
+  line-height: 1.35;
+  color: $color-text-03; // #6b6c70 - Default Gray
+  transition: color 0.2s ease;
+
+  .ccNavigationSecondaryTabs--mobile & {
+    font-size: 13px;
+    // Mobile keeps same padding as desktop: 14px 0 10px 0
+  }
+}
+
+// Element: Bottom indicator bar
+.ccNavigationSecondaryTabs__indicator {
+  height: 4px; // 4px height (Figma spec)
+  width: 100%;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+}
+
+// Hover State
+.ccNavigationSecondaryTabs--hover {
+  .ccNavigationSecondaryTabs__link {
+    color: $color-text-01; // #2f3031
+  }
+  .ccNavigationSecondaryTabs__indicator {
+    background-color: $color-base-06; // #00adae - Teal
+  }
+}
+
+// Focus State
+.ccNavigationSecondaryTabs--focus {
+  outline: none;
+
+  // Create the focus border effect using pseudo element
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 4px solid $color-support-input-focus-border; // #124248
+    border-radius: 6px;
+    pointer-events: none;
+  }
+
+  .ccNavigationSecondaryTabs__link {
+    color: $color-text-01; // #2f3031
+  }
+  .ccNavigationSecondaryTabs__indicator {
+    background-color: $color-base-06; // #00adae - Teal
+  }
+}
+
+// Active/Selected State
+.ccNavigationSecondaryTabs--active {
+  .ccNavigationSecondaryTabs__link {
+    color: $color-text-01; // #2f3031
+  }
+  .ccNavigationSecondaryTabs__indicator {
+    background-color: $color-base-06; // #00adae - Teal
+  }
+}
+
+// Disabled State
+.ccNavigationSecondaryTabs--disabled {
+  cursor: not-allowed;
+
+  .ccNavigationSecondaryTabs__link {
+    color: $color-text-04; // #CACCCE - Disabled color
+  }
+  .ccNavigationSecondaryTabs__indicator {
+    background-color: transparent !important;
+  }
+}
+
+// Responsive behavior (auto-switch to mobile below 768px)
+@media (max-width: calc(#{$breakpoint-lg} - 1px)) {
+  .ccNavigationSecondaryTabs {
+    height: 46px;
+  }
+  .ccNavigationSecondaryTabs__link {
+    font-size: 13px;
+  }
+}

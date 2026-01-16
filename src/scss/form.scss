@@ -193,7 +193,9 @@
 
 .pc-radio-inline,
 .pc-checkbox-inline {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
     & + & {
         margin-top: 0;
         margin-left: 10px;

@@ -1,153 +1,346 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 # Pampered Chef Cookbook Design System
 
-This project implements the Pampered Chef Cookbook design system using SCSS and Base UI components.
+A comprehensive design system implementation featuring SCSS-based styles and React/TypeScript components built on Base UI primitives. Styles were extracted from the official Pampered Chef Cookbook at https://www.pamperedchef.com/pc-cookbook/color.
 
-## Primary Approach: SCSS-based Design System
+## Quick Commands
 
-The **SCSS files** in `src/scss/` are the main source of truth for this project. These styles were extracted directly from the official Pampered Chef Cookbook website at https://www.pamperedchef.com/pc-cookbook/color using a browser extension, then refined and organized into a modular SCSS architecture.
-
-### Quick Commands
-
-**Compile SCSS to CSS:**
+### Development
 ```bash
-npx sass src/scss/index.scss src/css/cookbook.css
+npm run dev              # Start Vite dev server (React app on port 3000)
+npm run build            # Build React app for production (compiles SCSS + bundles React)
+npm run preview          # Preview production build
+npm run scss:build       # Compile SCSS to CSS only
+npm run scss:watch       # Watch SCSS files and auto-compile
 ```
 
-**Watch mode for development:**
+### Legacy Token Generation
 ```bash
-npx sass --watch src/scss/index.scss src/css/cookbook.css
+node generate-css.js     # Generate CSS from tokens.json (educational reference only)
 ```
 
-**Preview the design system:**
+### Preview
 ```bash
-open index.html
+open index.html          # Static HTML preview (legacy)
+# OR
+npm run dev              # React app preview (current)
 ```
+
+## Architecture Overview
+
+This project has two complementary layers that work together:
+
+### 1. SCSS Design System (Foundation)
+**Location:** `src/scss/`
+**Output:** `src/css/cookbook.css`
+
+The SCSS layer is the **primary source of truth** for all visual styling. It provides:
+- Design token variables (colors, spacing, breakpoints)
+- Typography mixins and utilities
+- Component styles with `.pc-*` class prefix
+- Compiled standalone CSS for use in any project
+
+**Import order matters** - see [src/scss/index.scss](src/scss/index.scss#L1-L27) for the correct dependency order:
+1. Variables (`*-variables.scss`)
+2. Mixins (`font-mixins.scss`)
+3. Base styles (`fonts.scss`, `color.scss`, `spacing.scss`, etc.)
+4. Component styles (`buttons.scss`, `form.scss`, `cards.scss`, etc.)
+5. Layout (`grid.scss`)
+
+### 2. React Component Library (Implementation)
+**Location:** `src/components/cc/`
+**Entry:** `src/App.tsx` → `src/main.tsx`
+
+React components built on [@mui/base](https://mui.com/base-ui/) v5.0.0-beta.70 that use the SCSS styles. All components:
+- Use Base UI primitives for behavior and accessibility
+- Apply SCSS-generated classes for styling
+- Follow naming convention: `CC[ComponentName]` (e.g., `CCButton`, `CCInput`)
+- Export from barrel file at [src/components/index.ts](src/components/index.ts#L1-L14)
 
 ## Project Structure
 
 ```
-src/
-├── scss/              # Production SCSS (PRIMARY - use these!)
-│   ├── index.scss    # Main entry point - imports all modules
-│   ├── *-variables.scss  # Design token variables
-│   ├── font-mixins.scss  # Typography mixins
-│   └── *.scss        # Component styles
+pc-cookbook-legacy/
+├── src/
+│   ├── scss/                          # SCSS design system (PRIMARY)
+│   │   ├── index.scss                 # Main entry - imports all modules
+│   │   ├── breakpoint-variables.scss  # Responsive breakpoints
+│   │   ├── color-variables.scss       # Color palette
+│   │   ├── font-mixins.scss           # Typography mixins
+│   │   ├── fonts.scss                 # Font loading
+│   │   ├── color.scss                 # Color utilities
+│   │   ├── spacing.scss               # Spacing utilities
+│   │   ├── interactive.scss           # Interactive states
+│   │   ├── lists.scss                 # List styles
+│   │   ├── buttons.scss               # Button components
+│   │   ├── form.scss                  # Form components
+│   │   ├── cards.scss                 # Card components
+│   │   ├── progressbars.scss          # Progress indicators
+│   │   ├── loaders.scss               # Loading spinners
+│   │   └── grid.scss                  # Layout system
+│   │
+│   ├── css/                           # Compiled CSS output
+│   │   ├── cookbook.css               # Main compiled stylesheet
+│   │   └── cookbook.css.map           # Source map
+│   │
+│   ├── components/                    # React components
+│   │   ├── cc/                        # Cookbook components (cc-*)
+│   │   │   ├── cc-badge/
+│   │   │   ├── cc-button/
+│   │   │   ├── cc-card/
+│   │   │   ├── cc-checkbox/
+│   │   │   ├── cc-input/
+│   │   │   ├── cc-radio/
+│   │   │   ├── cc-select/
+│   │   │   ├── cc-navigation-primary-button/
+│   │   │   ├── cc-navigation-secondary-tabs/
+│   │   │   ├── cc-navigation-main/
+│   │   │   └── cc-navigation-useful-links-menu/
+│   │   └── index.ts                   # Component exports
+│   │
+│   ├── App.tsx                        # Main React app (component demos)
+│   ├── main.tsx                       # Vite entry point
+│   └── tokens.json                    # Figma tokens (legacy reference)
 │
-├── css/              # Compiled CSS output
-│   ├── cookbook.css  # Main compiled stylesheet
-│   ├── cookbook.css.map
-│   └── *.css         # Legacy generated token files
+├── assets/
+│   ├── fonts/                         # Questa font files (local)
+│   ├── icons/                         # SVG icons and animated Lottie files
+│   └── logos/                         # Brand logos
 │
-└── tokens.json       # Figma token export (legacy reference)
+├── index.html                         # Vite HTML entry / Static preview
+├── vite.config.ts                     # Vite configuration
+├── tsconfig.json                      # TypeScript configuration
+├── generate-css.js                    # Legacy token generator
+└── package.json                       # Dependencies and scripts
 ```
 
-## Component Usage
+## Component Development
 
-All components use the `.pc-*` class prefix:
+### Creating New Components
 
-```html
-<!-- Buttons -->
-<button class="pc-btn-primary">Primary Button</button>
-<button class="pc-btn-secondary">Secondary Button</button>
-<button class="pc-btn-ghost">Ghost Button</button>
+1. **Create component directory:**
+   ```
+   src/components/cc/cc-[component-name]/
+   └── cc-[component-name].tsx
+   ```
 
-<!-- Form Input with floating label -->
-<div class="pc-form-container">
-  <input type="text" class="pc-form-control" placeholder=" " id="field">
-  <label class="pc-label" for="field">Label text</label>
-</div>
+2. **Use Base UI primitives** when available (Button, Input, Select, etc.)
 
-<!-- Checkbox -->
-<div class="pc-checkbox">
-  <input type="checkbox" id="check">
-  <label class="pc-label" for="check">Checkbox label</label>
-</div>
+3. **Apply SCSS classes** with `.pc-*` prefix for styling
 
-<!-- Radio -->
-<div class="pc-radio">
-  <input type="radio" id="radio" name="group">
-  <label class="pc-label" for="radio">Radio label</label>
-</div>
+4. **Export from barrel file** at [src/components/index.ts](src/components/index.ts#L1-L14)
+
+5. **Add to demo app** in [src/App.tsx](src/App.tsx#L1) for testing
+
+### Component Pattern Example
+
+```tsx
+// src/components/cc/cc-example/cc-example.tsx
+interface CCExampleProps {
+  variant?: 'primary' | 'secondary';
+  children: React.ReactNode;
+}
+
+export const CCExample = ({ variant = 'primary', children }: CCExampleProps) => {
+  return (
+    <div className={`pc-example pc-example-${variant}`}>
+      {children}
+    </div>
+  );
+};
 ```
 
-## Legacy: Token Generation (Educational Reference)
+## SCSS Development
 
-The `generate-css.js` script was an initial exercise to convert Figma design tokens from `tokens.json` into CSS. This approach has been superseded by the SCSS implementation, but the script remains for educational purposes.
+### Adding New Styles
 
-**What it did:**
-- Read `src/tokens.json` (exported from Figma using Tokens Studio)
-- Generated `colors.css`, `typography.css`, `spacing.css`
-- Created utility classes and CSS custom properties
-- Mapped font weights (Regular/Roman → 400, Bold → 700)
+1. Create new SCSS file in `src/scss/` (e.g., `tooltips.scss`)
+2. Add to [src/scss/index.scss](src/scss/index.scss#L1-L27) in appropriate section
+3. Use variables from `*-variables.scss` files
+4. Follow `.pc-*` naming convention
+5. Compile with `npm run scss:build`
 
-**To run (legacy):**
-```bash
-node generate-css.js
+### Using SCSS Variables and Mixins
+
+Variables and mixins are automatically available in React component `.module.scss` files via Vite configuration:
+
+```scss
+// Automatically imported (see vite.config.ts):
+// - @scss/breakpoint-variables
+// - @scss/color-variables
+// - @scss/font-mixins
+// - $spacers map
+
+.myComponent {
+  @include heading-5;              // Typography mixin
+  color: var(--pc-text-primary);   // Color variable
+  padding: map.get($spacers, 'lg'); // Spacing from map
+
+  @media (min-width: $breakpoint-md) { // Breakpoint variable
+    padding: map.get($spacers, 'xl');
+  }
+}
 ```
 
-**Why we moved to SCSS:**
-- Direct extraction from the production Pampered Chef website
-- More maintainable and modular
-- Better integration with Base UI components
-- Full preprocessor features (mixins, nesting, variables)
-- Compile-time optimizations
+## Vite Configuration
+
+Key features in [vite.config.ts](vite.config.ts#L1-L58):
+
+- **Path aliases:** `@/`, `@components/`, `@scss/`
+- **Auto-imported SCSS:** Variables and mixins available globally
+- **Dev server:** Port 3000, auto-opens browser
+- **CSS Modules:** `.module.scss` files with camelCase exports
+
+## TypeScript Configuration
+
+Path mappings in [tsconfig.json](tsconfig.json#L23-L29) match Vite aliases:
+- `@/*` → `src/*`
+- `@components/*` → `src/components/*`
+- `@scss/*` → `src/scss/*`
 
 ## Design Tokens
 
-### Colors
-Use CSS custom properties for colors:
-```css
-var(--pc-text-primary)
-var(--pc-surface-default)
-var(--pc-base-accent-one)
-var(--pc-interactive-default)
+### Colors (CSS Custom Properties)
+```scss
+// Text
+--pc-text-primary
+--pc-text-secondary
+--pc-text-tertiary
+--pc-text-base
+--pc-text-success
+--pc-text-error
+
+// Surface
+--pc-surface-default
+--pc-surface-tint-1
+--pc-surface-tint-2
+
+// Brand
+--pc-base-primary
+--pc-base-accent-one through --pc-base-accent-seven
+
+// Interactive
+--pc-interactive-default
+--pc-interactive-hovered
+--pc-interactive-pressed
+--pc-interactive-disabled
 ```
 
-### Spacing
-```css
+### Spacing (SCSS Map + CSS Vars)
+```scss
+// SCSS map (use in .module.scss files)
+$spacers: (
+  mini: 2px,
+  xs: 5px,
+  sm: 10px,
+  md: 15px,
+  lg: 20px,
+  xl: 25px,
+  '2xl': 30px,
+  '3xl': 40px,
+  '4xl': 50px,
+  '5xl': 60px
+);
+
+// CSS custom properties (use in HTML/CSS)
+var(--pc-spacer-mini)   /* 2px */
 var(--pc-spacer-xs)     /* 5px */
 var(--pc-spacer-sm)     /* 10px */
 var(--pc-spacer-md)     /* 15px */
-var(--pc-spacer-lg)     /* 20px */
-var(--pc-spacer-xl)     /* 25px */
-var(--pc-spacer-2xl)    /* 30px */
-/* ... up to 5xl (60px) */
+// ... up to 5xl (60px)
 ```
 
-### Typography
-Use utility classes:
+### Typography Classes
 ```html
-<h1 class="pc-heading-5">Largest heading</h1>
-<h2 class="pc-heading-4">Large heading</h2>
-<p class="pc-copy-2">Body text</p>
-<p class="pc-copy-strong-2">Bold body text</p>
+<!-- Headings -->
+<h1 class="pc-heading-5">Largest</h1>
+<h2 class="pc-heading-4">Large</h2>
+<h3 class="pc-heading-3">Medium</h3>
+
+<!-- Body text -->
+<p class="pc-copy-2">Regular</p>
+<p class="pc-copy-strong-2">Bold</p>
+
+<!-- Special -->
 <a class="pc-link">Link</a>
-<small class="pc-meta">Small text</small>
+<small class="pc-meta">Meta text</small>
 ```
 
-## Base UI Integration
+### Breakpoints (SCSS Variables)
+```scss
+$breakpoint-xs: 0;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1440px;
+```
 
-This project uses [@mui/base](https://mui.com/base-ui/) v5.0.0-beta.70 for accessible, unstyled component primitives. The SCSS files provide all visual styling.
-
-## Development Workflow
-
-1. **Edit SCSS files** in `src/scss/`
-2. **Compile** using the sass command above
-3. **Preview** in `index.html` to see changes
-4. **Use** compiled `src/css/cookbook.css` in your project
-
-## Font Loading
+## Fonts
 
 Three font families are used:
 - **Antonio** - Headings (Google Fonts)
 - **Inter** - Body text (Google Fonts)
 - **Questa** - Display text (local files in `assets/fonts/`)
 
-Fonts are loaded automatically via `src/scss/fonts.scss`.
+Fonts are loaded automatically via [src/scss/fonts.scss](src/scss/fonts.scss#L1).
+
+## Base UI Integration
+
+This project uses [@mui/base](https://mui.com/base-ui/) v5.0.0-beta.70 for:
+- Accessible, unstyled component primitives
+- Keyboard navigation and focus management
+- ARIA attributes and semantic HTML
+
+SCSS provides all visual styling while Base UI handles behavior.
+
+## Available Components
+
+### Form Components
+- `CCButton` - Primary, secondary, ghost variants
+- `CCInput` - Text input with floating labels
+- `CCCheckbox` - Custom styled checkbox
+- `CCRadio` / `CCRadioGroup` - Radio buttons with group management
+- `CCSelect` - Dropdown select with floating label
+
+### Layout Components
+- `CCCard` - Container with variants (default, light, dark)
+
+### Navigation Components
+- `CCBadge` - Label badges (yellow, red, primary variants)
+- `CCNavigationPrimaryButton` - Top-level nav buttons
+- `CCNavigationSecondaryTabs` - Tab navigation
+- `CCNavigationMain` - Complete navigation system
+- `CCNavigationUsefulLinksMenu` - Dropdown menu
+
+All components support:
+- Validation states (success, error, warning)
+- Disabled states
+- Mobile/responsive variants
+- Custom className for extension
+
+## Legacy Token Generation
+
+The `generate-css.js` script was an initial approach to convert Figma tokens from `tokens.json` into CSS. This has been superseded by the SCSS implementation but remains for reference.
+
+**What it did:**
+- Generated `colors.css`, `typography.css`, `spacing.css` from `tokens.json`
+- Created utility classes and CSS custom properties
+- Mapped font weights (Regular/Roman → 400, Bold → 700)
+
+**Why we moved to SCSS:**
+- Direct extraction from production Pampered Chef website
+- More maintainable modular architecture
+- Better preprocessor features (mixins, nesting, functions)
+- Compile-time optimizations
 
 ## Key Resources
 
-- **Source of truth**: https://www.pamperedchef.com/pc-cookbook/color
-- **Preview**: `index.html` (tabbed interface with Foundations + Components)
-- **Main stylesheet**: `src/css/cookbook.css`
-- **SCSS entry**: `src/scss/index.scss`
+- **Design source:** https://www.pamperedchef.com/pc-cookbook/color
+- **SCSS entry point:** [src/scss/index.scss](src/scss/index.scss#L1)
+- **React entry point:** [src/main.tsx](src/main.tsx#L1)
+- **Component demos:** [src/App.tsx](src/App.tsx#L1)
+- **Compiled CSS:** [src/css/cookbook.css](src/css/cookbook.css#L1)
