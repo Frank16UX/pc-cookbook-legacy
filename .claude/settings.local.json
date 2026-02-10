@@ -35,7 +35,8 @@
       "Bash(npm run build:package:*)",
       "Bash(npm run build:lib:*)",
       "Bash(npm pack:*)",
-      "Bash(npm version:*)"
+      "Bash(npm version:*)",
+      "Bash(git push:*)"
     ]
   }
 }
