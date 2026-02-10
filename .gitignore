@@ -38,3 +38,6 @@ Thumbs.db
 # Project-specific backups
 src/scss-backup/
 src/tokens-original.json
+
+# References
+.PACKAGE_GUIDE-reference.md

@@ -17,6 +17,14 @@ npm run scss:build       # Compile SCSS to CSS only
 npm run scss:watch       # Watch SCSS files and auto-compile
 ```
 
+### Package Publishing
+```bash
+npm run build:package    # Build library for publishing (SCSS + Vite lib + TypeScript declarations)
+npm run build:lib        # Build Vite library + TypeScript declarations only
+npm pack --dry-run       # Preview what will be published
+npm version patch        # Bump version, create git tag (then push tag to trigger CI publish)
+```
+
 ### Legacy Token Generation
 ```bash
 node generate-css.js     # Generate CSS from tokens.json (educational reference only)
@@ -111,9 +119,14 @@ pc-cookbook-legacy/
 │   └── logos/                         # Brand logos
 │
 ├── index.html                         # Vite HTML entry / Static preview
-├── vite.config.ts                     # Vite configuration
+├── vite.config.ts                     # Vite configuration (dev + app build)
+├── vite.config.lib.ts                 # Vite configuration (library build)
 ├── tsconfig.json                      # TypeScript configuration
+├── tsconfig.build.json                # TypeScript build config (declarations)
+├── .npmrc                             # GitHub Packages registry config
+├── .github/workflows/publish.yml      # CI/CD for auto-publishing on version tags
 ├── generate-css.js                    # Legacy token generator
+├── PACKAGE_GUIDE.md                   # Package publishing and usage guide
 └── package.json                       # Dependencies and scripts
 ```
 
@@ -337,10 +350,52 @@ The `generate-css.js` script was an initial approach to convert Figma tokens fro
 - Better preprocessor features (mixins, nesting, functions)
 - Compile-time optimizations
 
+## Package Publishing
+
+This project is published as `@frank16ux/pc-cookbook-legacy` on GitHub Packages. For full details see [PACKAGE_GUIDE.md](PACKAGE_GUIDE.md).
+
+### Package Name
+`@frank16ux/pc-cookbook-legacy`
+
+### Build Pipeline
+
+The project has two separate build modes:
+- **App build** (`npm run build`) — Builds the demo React app to `dist/` (HTML + bundled assets)
+- **Library build** (`npm run build:package`) — Builds the publishable package to `dist/` (ESM + CJS + TypeScript declarations + CSS)
+
+Key files:
+- [vite.config.lib.ts](vite.config.lib.ts#L1) — Vite library build config (separate from app config)
+- [tsconfig.build.json](tsconfig.build.json#L1) — TypeScript declaration generation config
+- [src/index.ts](src/index.ts#L1) — Package entry point (barrel export)
+- [.github/workflows/publish.yml](.github/workflows/publish.yml#L1) — CI/CD workflow
+
+### Package Exports
+
+Consumers can import:
+- `@frank16ux/pc-cookbook-legacy` — React components (ESM/CJS)
+- `@frank16ux/pc-cookbook-legacy/dist/index.css` — Component CSS (from Vite library build)
+- `@frank16ux/pc-cookbook-legacy/styles` — Full cookbook stylesheet (`cookbook.css`)
+- `@frank16ux/pc-cookbook-legacy/scss` — SCSS entry point (all variables, mixins, styles)
+- `@frank16ux/pc-cookbook-legacy/scss/*` — Individual SCSS files
+- `@frank16ux/pc-cookbook-legacy/assets/*` — Icons, fonts, logos
+
+### Publishing Workflow
+1. Merge changes to `main`
+2. Run `npm version patch` (or `minor`/`major`)
+3. Push the tag: `git push origin v<version>`
+4. GitHub Actions automatically builds and publishes to GitHub Packages
+
+### Peer Dependencies
+- `react` ^18.0.0 || ^19.0.0
+- `react-dom` ^18.0.0 || ^19.0.0
+
 ## Key Resources
 
 - **Design source:** https://www.pamperedchef.com/pc-cookbook/color
+- **Package guide:** [PACKAGE_GUIDE.md](PACKAGE_GUIDE.md)
 - **SCSS entry point:** [src/scss/index.scss](src/scss/index.scss#L1)
+- **Package entry point:** [src/index.ts](src/index.ts#L1)
 - **React entry point:** [src/main.tsx](src/main.tsx#L1)
 - **Component demos:** [src/App.tsx](src/App.tsx#L1)
 - **Compiled CSS:** [src/css/cookbook.css](src/css/cookbook.css#L1)
+- **GitHub Packages:** https://github.com/Frank16UX/pc-cookbook-legacy/packages

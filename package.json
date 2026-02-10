@@ -1,29 +1,70 @@
 {
-  "name": "pc-cookbook-legacy",
+  "name": "@frank16ux/pc-cookbook-legacy",
   "version": "1.0.0",
-  "description": "",
-  "main": "generate-css.js",
+  "description": "Pampered Chef Cookbook Design System - React components and SCSS design tokens",
+  "author": "Frank16UX",
+  "license": "UNLICENSED",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./styles": "./src/css/cookbook.css",
+    "./scss": "./src/scss/index.scss",
+    "./scss/*": "./src/scss/*",
+    "./assets/*": "./assets/*",
+    "./dist/index.css": "./dist/index.css"
+  },
+  "files": [
+    "dist",
+    "src/scss",
+    "src/css",
+    "assets"
+  ],
   "scripts": {
     "dev": "npx vite",
     "build": "npm run scss:build && npx vite build",
+    "build:lib": "vite build --config vite.config.lib.ts && tsc --project tsconfig.build.json",
+    "build:package": "npm run scss:build && npm run build:lib",
     "scss:build": "npx sass src/scss/index.scss src/css/cookbook.css",
     "scss:watch": "npx sass --watch src/scss/index.scss src/css/cookbook.css",
     "preview": "npx vite preview",
+    "prepublishOnly": "npm run build:package",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "module",
+  "keywords": [
+    "pampered-chef",
+    "design-system",
+    "react",
+    "scss"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
   "dependencies": {
-    "@mui/base": "^5.0.0-beta.70",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3"
+    "@mui/base": "^5.0.0-beta.70"
   },
   "devDependencies": {
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.2",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "sass": "^1.97.2",
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
