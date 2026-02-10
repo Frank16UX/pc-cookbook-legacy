@@ -81,9 +81,9 @@ const SECONDARY_TABS_CONFIG: Record<PrimaryTab, SecondaryTabConfig[]> = {
   ],
   'MARKETING RESOURCES': [
     { label: 'Monthly Focus' },
+    { label: 'Marketing Imagery', badge: 'New' },
     { label: 'Message Templates' },
     { label: 'Plan a Party' },
-    { label: 'Marketing Imagery', badge: 'New' },
     { label: 'Program Overviews' },
   ],
 };
@@ -153,6 +153,7 @@ export function CCNavigationMain({
                 key={`inline-${tab.id}`}
                 variant={tab.hasDot ? 'dot' : tab.badge ? 'badge' : 'none'}
                 badgeLabel={tab.badge}
+                isActive={currentPrimary === tab.id}
                 onClick={() => handlePrimaryClick(tab.id)}
               >
                 {tab.label}
@@ -204,6 +205,7 @@ export function CCNavigationMain({
                 key={tab.id}
                 variant={tab.hasDot ? 'dot' : tab.badge ? 'badge' : 'none'}
                 badgeLabel={tab.badge}
+                isActive={currentPrimary === tab.id}
                 onClick={() => handlePrimaryClick(tab.id)}
               >
                 {tab.label}
@@ -268,6 +270,7 @@ export function CCNavigationMain({
               key={tab.id}
               variant={tab.hasDot ? 'dot' : tab.badge ? 'badge' : 'none'}
               badgeLabel={tab.badge}
+              isActive={currentPrimary === tab.id}
               mobile
               onClick={() => handlePrimaryClick(tab.id)}
             >

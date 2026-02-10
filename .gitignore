@@ -40,3 +40,4 @@ src/tokens-original.json
 
 # References
 .PACKAGE_GUIDE-reference.md
+/src/components/cc-reference

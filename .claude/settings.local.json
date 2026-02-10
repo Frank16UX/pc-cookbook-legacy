@@ -36,7 +36,9 @@
       "Bash(npm run build:lib:*)",
       "Bash(npm pack:*)",
       "Bash(npm version:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "WebFetch(domain:give-sleek-86321251.figma.site)",
+      "Bash(curl:*)"
     ]
   }
 }

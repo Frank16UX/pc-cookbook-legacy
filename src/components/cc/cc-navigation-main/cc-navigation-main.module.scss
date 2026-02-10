@@ -4,6 +4,12 @@
 // CC NAVIGATION MAIN
 // =============================================================================
 .ccNavigationMain {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   width: 100%;
   background-color: $color-ui-01;
   display: flex;
@@ -102,7 +108,8 @@
   }
 
   &__searchUtilityWrapper {
-    flex-grow: 1;
+    flex: 1 1 auto;
+    min-width: 0;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -110,7 +117,8 @@
   }
 
   &__searchField {
-    flex-grow: 1;
+    flex: 1 1 auto;
+    min-width: 0;
     max-width: 500px;
     height: 40px;
     position: relative;
@@ -121,7 +129,7 @@
       height: 100%;
       border-radius: 30px;
       border: 1px solid $color-ui-11;
-      padding: 0 44px 0 map.get($spacers, lg);
+      padding: 0 40px 0 map.get($spacers, lg);
       font-size: 16px;
       color: $color-text-01;
       background-color: $color-ui-01;
@@ -140,7 +148,7 @@
 
   &__searchIcon {
     position: absolute;
-    right: 14px;
+    right: 12px;
     top: 50%;
     transform: translateY(-50%);
     width: 24px;
@@ -161,6 +169,7 @@
     display: flex;
     gap: map.get($spacers, '2xl');
     align-items: center;
+    flex-shrink: 0;
   }
 
   &__iconLink {
@@ -171,15 +180,15 @@
     cursor: pointer;
     background: none;
     border: none;
-    padding: map.get($spacers, xs);
+    padding: 0;
     color: $color-ui-13;
     transition: color 200ms ease;
     text-decoration: none;
 
     svg {
-      width: 24px;
-      height: 24px;
-      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
     }
 
     span {
@@ -195,7 +204,7 @@
       color: $color-base-01; // Darker teal on hover
     }
 
-    &:focus {
+    &:focus-visible {
       outline: 2px solid $color-support-input-focus-border;
       outline-offset: 2px;
       border-radius: 2px;

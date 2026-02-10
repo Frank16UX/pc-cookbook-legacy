@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef } from 'react';
 import styles from './cc-navigation-secondary-tabs.module.scss';
 import { CCBadge } from '../cc-badge';
 
@@ -85,29 +85,16 @@ export const CCNavigationSecondaryTabs = forwardRef<
     },
     ref
   ) => {
-    // Internal state for hover/focus (isActive comes from parent)
-    const [isHovered, setIsHovered] = useState(false);
-    const [isFocused, setIsFocused] = useState(false);
-
-    // BEM class building with state priority: active > focus > hover
+    // BEM class building
     const tabClasses = [
       styles.ccNavigationSecondaryTabs,
       mobile && styles['ccNavigationSecondaryTabs--mobile'],
-      // Priority: active > focus > hover (mutually exclusive)
       isActive && styles['ccNavigationSecondaryTabs--active'],
-      !isActive && isFocused && styles['ccNavigationSecondaryTabs--focus'],
-      !isActive && !isFocused && isHovered && styles['ccNavigationSecondaryTabs--hover'],
       disabled && styles['ccNavigationSecondaryTabs--disabled'],
       className,
     ]
       .filter(Boolean)
       .join(' ');
-
-    // Event handlers
-    const handleMouseEnter = () => !disabled && setIsHovered(true);
-    const handleMouseLeave = () => setIsHovered(false);
-    const handleFocus = () => !disabled && setIsFocused(true);
-    const handleBlur = () => setIsFocused(false);
 
     return (
       <button
@@ -122,10 +109,6 @@ export const CCNavigationSecondaryTabs = forwardRef<
         aria-controls={ariaControls}
         aria-label={ariaLabel || (typeof children === 'string' ? children : undefined)}
         tabIndex={isActive ? 0 : -1}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
       >
         {/* Link area: contains text + badge horizontally */}
         <span className={styles.ccNavigationSecondaryTabs__link}>

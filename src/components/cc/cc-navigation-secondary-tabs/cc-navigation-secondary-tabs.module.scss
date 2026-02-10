@@ -49,39 +49,41 @@
   transition: background-color 0.2s ease;
 }
 
-// Hover State
-.ccNavigationSecondaryTabs--hover {
-  .ccNavigationSecondaryTabs__link {
-    color: $color-text-01; // #2f3031
+// Block: Container — interactive states via CSS pseudo-classes
+.ccNavigationSecondaryTabs {
+  // Hover State
+  &:hover {
+    .ccNavigationSecondaryTabs__link {
+      color: $color-text-01; // #2f3031
+    }
+    .ccNavigationSecondaryTabs__indicator {
+      background-color: $color-base-06; // #00adae - Teal
+    }
   }
-  .ccNavigationSecondaryTabs__indicator {
-    background-color: $color-base-06; // #00adae - Teal
+
+  // Focus State (keyboard only)
+  &:focus-visible {
+    outline: none;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border: 4px solid $color-support-input-focus-border; // #124248
+      border-radius: 6px;
+      pointer-events: none;
+    }
+
+    .ccNavigationSecondaryTabs__link {
+      color: $color-text-01; // #2f3031
+    }
+    .ccNavigationSecondaryTabs__indicator {
+      background-color: $color-base-06; // #00adae - Teal
+    }
   }
 }
 
-// Focus State
-.ccNavigationSecondaryTabs--focus {
-  outline: none;
-
-  // Create the focus border effect using pseudo element
-  &::before {
-    content: '';
-    position: absolute;
-    inset: -4px;
-    border: 4px solid $color-support-input-focus-border; // #124248
-    border-radius: 6px;
-    pointer-events: none;
-  }
-
-  .ccNavigationSecondaryTabs__link {
-    color: $color-text-01; // #2f3031
-  }
-  .ccNavigationSecondaryTabs__indicator {
-    background-color: $color-base-06; // #00adae - Teal
-  }
-}
-
-// Active/Selected State
+// Active/Selected State (BEM modifier from parent)
 .ccNavigationSecondaryTabs--active {
   .ccNavigationSecondaryTabs__link {
     color: $color-text-01; // #2f3031
