@@ -30,7 +30,8 @@
       "Bash(npm config list:*)",
       "Bash(npm config:*)",
       "Bash(npm ls:*)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(git push origin main)"
     ]
   }
 }
